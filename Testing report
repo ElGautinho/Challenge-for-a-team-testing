@@ -1,0 +1,131 @@
+Hi team
+
+Following @bahati7’s suggestion, here is a simple **test report template** we can start using.
+
+The idea is NOT that this is the perfect or final model, but just a **practical guide** to help us:
+
+* capture what we observe while testing (in real time),
+* focus on what is not normal (vs the use case or what is undefined),
+* and make it easier to track and understand issues.
+
+It is not exhaustive, and we are absolutely free to improve it as we learn.
+
+Let’s use it, experiment with it, break it if needed, and share what works better.
+
+# TEST NOTES (Live Testing)
+
+> I document my observations **as I test**, not after.  
+> I focus on what is **not normal**, meaning:
+>
+> - What does NOT match the documented use case  
+> - What is NOT defined in the use case but happens anyway  
+
+---
+
+## What I am testing
+
+I am testing:
+
+> (Example: Create Account with valid email and password)
+
+---
+
+## What I did (steps)
+
+I describe exactly what I did so someone else can   @@reproduce it.
+
+1. I opened the application  
+2. I clicked on “Create Account”  
+3. I entered:  
+   - Email: test@email.com  
+   - Password: 123456  
+4. I clicked “Submit”  
+
+---
+
+## What I noticed (IMPORTANT)
+
+I write here **anything that feels wrong, unexpected, or unclear**.
+
+> Example:
+>
+> - Nothing happened after clicking “Submit”  
+> - No confirmation message  
+> - I don’t know if the account was created  
+
+---
+
+## What should have happened
+
+Based on the use case (or common sense):
+
+> Example:
+>
+> - I should be redirected  
+> OR  
+> - I should see a success message  
+
+---
+
+## Is this a problem?
+
+If YES, I describe it clearly:
+
+- **Short description:**  
+  > Example: “Submit button does nothing”
+
+- **Why this is a problem:**  
+  > It does not match the expected behavior in the use case  
+
+- **Type:** Bug / UX / Missing behavior  
+
+- **Severity (my opinion):** Low / Medium / High  
+
+---
+
+## Special note (VERY IMPORTANT)
+
+I explicitly note:
+
+- If something expected is missing  
+- If something happens but is NOT described in the use case  
+
+> Example:  
+> “There is no error message when the form is invalid (not mentioned in the use case either)”
+
+---
+
+## Evidence
+
+- I add screenshots when needed  
+- I make sure the issue is visible in context  
+
+---
+
+## My thoughts / questions
+
+- What confused me  
+- What I don’t understand  
+- Ideas for improvement  
+
+> Example:  
+> “As a new user, I don’t know what to do next”
+
+---
+
+## Action taken
+
+- [ ] I created a sub-issue  
+- [ ] I added the "bug" label  
+- [ ] I continued testing  
+
+Sub-issue link: . . . . . . . .
+
+---
+
+## Files (if any)
+
+/tests/[my-name]/[use-case]/[test-name]/
+
+@AshDest @MichaelKentBurns @Samuel11s @ElGautinho
+@THEOPHILEACHIZA @bahati7 
