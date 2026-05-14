@@ -73,7 +73,7 @@ A Student user should select:
 
 These fields are missing from the registration flow.
 
-The system goes directly to the registration form.
+The system goes directly to the dush body form.
 
 ## Impact
 
