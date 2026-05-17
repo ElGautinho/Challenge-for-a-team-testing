@@ -110,7 +110,7 @@ I was testing the **login (authentication) workflow** for the MKB Survey Applica
 
 ---
 
-### TC-05 · "Forgot Password?" / "Lost Password" Link Accessible
+### TC-05 · "Forgot Password?" / "Lost Password" Link Accessible 
 
 **Steps:**
 
