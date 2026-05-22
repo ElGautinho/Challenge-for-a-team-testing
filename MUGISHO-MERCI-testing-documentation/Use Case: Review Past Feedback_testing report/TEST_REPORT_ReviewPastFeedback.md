@@ -221,30 +221,56 @@ When accessing the "My Completed Surveys" page, all submitted survey responses s
 
 **Overall Test Result:** ⚠️ **75% PASS RATE (6/8 cases passed)**
 
----
+## 5. What I Saw
 
-## 6. Recommendations & Next Steps
+- I saw that most survey sections display answers correctly and the completed survey list is accessible.
+- The "Frontend Questions" and "Backend Questions" sections load but do not display the submitted answers.
+- Other review sections such as Your Self, Fullstack Questions, Development, Read About, and Read Home render data as expected.
+- This indicates a targeted display issue rather than a complete breakdown of the review feedback system.
 
-### 6.1 Immediate Actions Required
-1. **Investigate Backend API:** Verify that the `/api/surveys/responses` endpoint correctly returns data for Frontend and Backend question types
-2. **Debug Frontend Component:** Check React/Vue component rendering logic for these specific question categories
-3. **Review Data Schema:** Confirm that Frontend/Backend questions are correctly mapped in the survey response data model
+## 6. What UC Says
 
-### 6.2 Quality Assurance Verification
-1. Once issue is fixed, re-test all 8 test cases
-2. Verify data consistency across all browsers
-3. Perform cross-browser compatibility testing (Chrome, Firefox, Safari, Edge)
-4. Test with multiple user accounts to ensure issue is not user-specific
+- UC-ReviewPastFeedback requires users to view historical feedback for completed surveys.
+- It specifies that instructors should be able to see the responses for surveys they created and that students should see their own submissions.
+- It also requires filtering, detailed response views, and export options for review data.
+- Role-based access and secure visibility controls are part of the expected behavior.
 
-### 6.3 Regression Testing
+## 7. What Was Not Respected Compared to the UC
+
+- Responses for Frontend Questions and Backend Questions are not displayed, violating the feedback review requirement.
+- There is no visible evidence of filtering or export functionality in the current UI.
+- The report does not show audit or access logging, which is part of the documented use case.
+
+## 8. Professional Improvement Proposals
+
+- Fix the data retrieval or rendering bug for Frontend and Backend question sections.
+- Add filtering controls by survey title, date range, and student name for instructors.
+- Introduce export options such as CSV and PDF for completed feedback reports.
+- Implement clearer empty-state messaging for sections that have no data.
+- Add audit logging for feedback view actions to strengthen traceability and security.
+
+## 9. Recommendations & Next Steps
+
+### 9.1 Immediate Actions Required
+1. **Investigate Backend API:** Verify that the `/api/surveys/responses` endpoint correctly returns data for Frontend and Backend question types.
+2. **Debug Frontend Component:** Check the rendering logic for these specific question categories.
+3. **Review Data Schema:** Confirm that Frontend/Backend questions are correctly mapped in the survey response data model.
+
+### 9.2 Quality Assurance Verification
+1. Once the issue is fixed, re-test all 8 test cases.
+2. Verify data consistency across all browsers.
+3. Perform cross-browser compatibility testing (Chrome, Firefox, Safari, Edge).
+4. Test with multiple user accounts to ensure the issue is not user-specific.
+
+### 9.3 Regression Testing
 After bug fix implementation:
-- Verify other survey sections still display correctly
-- Test with surveys containing all question types
-- Validate that export functionality (CSV/PDF) includes Frontend/Backend answers
+- Verify other survey sections still display correctly.
+- Test with surveys containing all question types.
+- Validate that export functionality (CSV/PDF) includes Frontend/Backend answers.
 
 ---
 
-## 7. Test Conclusion
+## 10. Test Conclusion
 
 The "Review Past Feedback" functionality is **partially operational** with a critical defect that prevents users from viewing their answers for Frontend and Backend survey sections. While the core navigation and display mechanism works correctly for other sections, the identified bug represents a significant gap in feature completeness.
 

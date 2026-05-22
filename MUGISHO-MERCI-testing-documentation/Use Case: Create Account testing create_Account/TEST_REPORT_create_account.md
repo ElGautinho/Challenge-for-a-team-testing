@@ -242,9 +242,35 @@ I was testing the **account creation (registration) workflow** for the MKB Surve
 | TC-10 | Setting a new password via reset link              | ✅ Pass | —        |
 | TC-11 | Reset password confirmation page                   | ✅ Pass | —        |
 
+## 5. What I Saw
+
+- I confirmed that the registration page loads and accepts standard account creation fields.
+- The form validation correctly rejects invalid emails and duplicate user data.
+- The password reset path is functional and confirms changes.
+- The student-specific role fields required by the UC are missing from the registration flow.
+
+## 6. What the UC Says
+
+- UC-Create_Account requires role-based registration fields, including academic level and programming languages for students.
+- It expects validation for invalid email addresses and duplicate users.
+- It requires the system to send a confirmation email and support password recovery.
+
+## 7. What Was Not Respected Compared to the UC
+
+- Student role conditional fields are absent, violating the use case expectation for student registration data collection.
+- The documentation requires stepwise guidance for Student data; the current form remains generic for all users.
+
+## 8. Professional Improvement Proposals
+
+- Implement dynamic role-based fields: when the Student role is selected, display academic level and preferred programming languages.
+- Add inline helper text explaining why these fields are required for student assignments.
+- Add a visual progress indicator for the registration process to reduce user uncertainty.
+- Ensure the UI guides users toward completing all required fields before submission.
+- Log the registration steps for analytics and follow-up to identify where users may abandon the form.
+
 ---
 
-## 5. Bug Report
+## 9. Bug Report
 
 ### BUG-01 · Student-Specific Fields Missing from Registration Form
 

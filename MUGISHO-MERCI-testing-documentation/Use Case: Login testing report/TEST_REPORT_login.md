@@ -136,9 +136,36 @@ I was testing the **login (authentication) workflow** for the MKB Survey Applica
 | TC-04 | Login with valid credentials → dashboard redirect      | ✅ Pass | —        |
 | TC-05 | "Lost Password" page accessible from login             | ✅ Pass | —        |
 
+## 5. What I Saw
+
+- I verified that the login interface loads correctly and presents the expected fields.
+- The application correctly rejects unregistered accounts and successful credentials redirect to the dashboard.
+- The password recovery entry point is available and functional.
+- The security behavior for multiple failed login attempts is missing, which is a major gap.
+
+## 6. What the UC Says
+
+- UC-Login requires a working authentication flow with valid and invalid credential handling.
+- It specifies role-based dashboard redirection and an account lockout policy after repeated failed attempts.
+- It also requires the forgotten password recovery path to be accessible.
+
+## 7. What Was Not Respected Compared to the UC
+
+- The lockout policy after repeated failed login attempts was not implemented.
+- No CAPTCHA or progressive delay mechanism appeared after multiple failures.
+- Role-based dashboard redirect verification was not fully tested in this report and should be confirmed.
+
+## 8. Professional Improvement Proposals
+
+- Implement an account lockout policy after 3–5 failed attempts and show explicit messaging.
+- Add a CAPTCHA or progressively increasing wait time on repeated failures to reduce brute-force risk.
+- Confirm and document that each role (Student, Instructor, Admin) lands on the correct dashboard.
+- Add session timeout and login audit logging for security and traceability.
+- Improve the login UI by showing clear validation messages near each form field.
+
 ---
 
-## 5. Bug Report
+## 9. Bug Report
 
 ### BUG-01 · No Account Lockout After Multiple Failed Login Attempts
 

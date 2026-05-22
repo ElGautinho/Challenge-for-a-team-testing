@@ -116,9 +116,35 @@ I was testing the **student feedback / survey submission workflow** for the MKB 
 | TC-03 | Survey opened, questions answered, review possible      | ✅ Pass | —        |
 | TC-04 | Survey submitted — confirmation screen displayed        | ✅ Pass | —        |
 
+## 5. What I Saw
+
+- I confirmed that the student dashboard loads correctly and exposes available surveys.
+- The survey list is accessible and the survey content displays as expected.
+- The student can complete the survey and receive a submission confirmation.
+- The UI terminology uses "sodage" instead of "survey," which is inconsistent with the documentation.
+
+## 6. What the UC Says
+
+- UC-ProvideFeedback requires students to authenticate, access assigned surveys, answer all questions, and submit feedback securely.
+- It expects automatic save of partial progress, required-field validation, and confirmation after submission.
+
+## 7. What Was Not Respected Compared to the UC
+
+- I did not verify partial progress saving for an abandoned survey.
+- I did not verify that required questions block submission if left unanswered.
+- The application uses the term "sodage," creating a terminology mismatch with the documented use case.
+
+## 8. Professional Improvement Proposals
+
+- Align UI wording with documentation by replacing "sodage" with "survey" or updating the documentation to match.
+- Add an explicit progress-saving indicator when students leave a survey incomplete.
+- Add a clear required-field validation summary before submission.
+- Provide a confirmation page or toast message that explicitly states the survey was saved and submitted.
+- Implement role-specific guidance on the student dashboard to show which surveys are currently available and which are completed.
+
 ---
 
-## 5. Special Notes
+## 9. Special Notes
 
 > ✅ **The core Provide Feedback flow works end-to-end:** A logged-in student can navigate from the home page → All Surveys → open a survey → complete it → submit it → and receive a confirmation. This matches the Typical Course of Events described in UC-ProvideFeedback.
 
