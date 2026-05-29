@@ -1,175 +1,190 @@
-# TEST REPORT — REVIEW PAST FEEDBACK (STUDENT ROLE)
-
-## 1. Introduction
-
-This document presents a structured QA analysis of the **“Review Past Feedback”** use case within the Student Survey Application.
-
-The objective is to verify whether the system correctly allows a **Student user** to access, review, and interact with previously submitted survey responses, in compliance with the functional requirements defined in the Use Case specification.
-
-Testing was conducted exclusively from the **Student perspective**, as per role restrictions.
+# TEST NOTES — Review Past Feedback (Student Role)
 
 ---
 
-## 2. Use Case Reference
+## What I am testing
 
-### Core Requirements
+I am testing:
 
-The system must allow a Student to:
+> Student access to previously completed surveys and submitted feedback history (“Review Past Feedback” use case)
 
-- access a list of completed surveys
-- view survey metadata (title, date, status)
-- open and review previously submitted responses
-- ensure data privacy (only own submissions visible)
-- optionally filter or search historical feedback
-- maintain data persistence across sessions
+The objective is to verify:
 
----
-
-## 3. Observed System Behavior Overview
-
-The following behaviors were observed during testing:
-
-- A “My Completed Surveys” menu is available after login
-- Completed surveys are displayed in a list format
-- Only survey titles are displayed in the list view
-- Clicking a survey reveals detailed responses
-- Data is persistent across refresh and navigation
-- Access is correctly restricted to the authenticated student’s own data
-- No export functionality is available for Student role (correct per specification)
+* access to completed surveys
+* visibility of historical responses
+* data persistence
+* role-based access restrictions
+* usability of feedback history navigation
 
 ---
 
-## 4. Functional Compliance Analysis
+## What I did (steps)
 
-| Requirement | Observed Behavior | Status |
-|--------------|------------------|--------|
-| Access to completed surveys | Available via menu | ✅ Compliant |
-| Display of survey list | Functional | ✅ Compliant |
-| Display of title | Visible | ✅ Compliant |
-| Display of submission date | Missing | ❌ Non-compliant |
-| Display of status | Missing | ❌ Non-compliant |
-| View detailed responses | Functional | ✅ Compliant |
-| Data privacy (own surveys only) | Correctly enforced | ✅ Compliant |
-| Search functionality | Not implemented | ❌ Non-compliant |
-| Filtering functionality | Not implemented | ❌ Non-compliant |
-| Data persistence | Functional | ✅ Compliant |
-| Export functionality (Student) | Not available | ✅ Compliant |
+1. Logged into the application as Student
+2. Opened the dashboard
+3. Accessed the “My Completed Surveys” menu
+4. Opened previously submitted surveys
+5. Reviewed displayed questions and responses
+6. Refreshed the page after viewing responses
+7. Logged out and logged back in
+8. Checked whether completed surveys remained accessible
+9. Attempted to identify search/filter features
+10. Verified whether access to other students’ surveys was possible
 
 ---
 
-## 5. Key Issues Identified
+## What I noticed
 
-### 🟡 1. Missing Survey Metadata (Date & Status)
-
-The survey list only displays the **title**, while required metadata is absent.
-
-#### Impact
-- reduced traceability of submissions
-- incomplete historical context
-- partial compliance with Use Case specification
-
----
-
-### 🟡 2. Missing Search and Filter Functionality
-
-No mechanism is provided to:
-- search surveys by title
-- filter by date range
-- refine historical results
-
-#### Impact
-- inefficient navigation in history
-- reduced usability for users with many surveys
-- deviation from Use Case requirements
+* “My Completed Surveys” is available after authentication
+* Completed surveys are displayed in a list format
+* Only survey titles are visible in the list view
+* Clicking a survey displays submitted questions and answers
+* Survey details are displayed directly below the survey list
+* Historical data remains accessible after refresh and session restart
+* Students can only access their own completed surveys
+* No search functionality exists
+* No filtering system exists
+* No export functionality is available for Student role
 
 ---
 
-### 🟢 3. Inline Display of Survey Details (UX Limitation)
+## What should have happened
 
-Survey responses are displayed directly beneath the list rather than in a dedicated view.
+Based on the documented use case:
 
-#### Impact
-- reduced readability
-- weak separation of interface concerns
-- suboptimal user experience design
+* Survey history should display:
 
----
-
-## 6. Positive Observations
-
-Despite the identified gaps, several core functionalities are correctly implemented:
-
-- authentication-based access control is enforced
-- students can only access their own submissions
-- survey response data is correctly stored and retrieved
-- session persistence is stable
-- UI is responsive across devices
-- completed surveys remain accessible after refresh
+  * title
+  * submission date
+  * completion status
+* Students should be able to search or filter historical surveys
+* Historical survey navigation should remain readable and structured
+* Role restrictions should prevent access to other students’ data
 
 ---
 
-## 7. Security and Access Control Review
+## Is this a problem?
 
-- Role-based access control is correctly implemented
-- No cross-user data leakage detected
-- No unauthorized access to other students’ feedback possible
-- Export functionality is correctly restricted from Student role
-
-➡️ Security baseline is considered **stable and compliant**
+Yes
 
 ---
 
-## 8. UX and Interface Observations
+## Summary of issues
 
-- Interface is responsive and stable
-- Navigation is intuitive through dashboard menu
-- Feedback details are accessible but not optimally structured
-- Lack of filtering/search reduces usability in long-term usage
+### 1. Missing survey metadata in history view
 
----
+**Observed behavior:**
 
-## 9. Compliance Summary
+* Only survey titles are displayed
+* No submission date shown
+* No completion status shown
 
-### Fully Compliant Areas
-- authentication and access control
-- survey listing and retrieval
-- detailed response viewing
-- data persistence
-- role-based restrictions
+**Impact:**
+Reduces historical traceability and context visibility.
 
-### Partially Compliant Areas
-- survey list metadata (missing date/status)
-- UI structure for detail view
+**Type:**
+UI / Missing Information
 
-### Non-Compliant Areas
-- search functionality
-- filtering system
+**Severity:**
+Medium 🟡
 
 ---
 
-## 10. Conclusion
+### 2. Missing search and filtering functionality
 
-The system demonstrates a solid functional foundation for the **Review Past Feedback** use case, particularly in authentication, data access control, and response retrieval.
+**Observed behavior:**
 
-However, there are notable functional gaps in:
-- metadata completeness
-- history navigation tools (search/filter)
+* No search bar exists
+* No filtering by date or survey title exists
 
-These limitations affect usability and do not fully align the implementation with the expected specification of the Use Case.
+**Impact:**
+Makes navigation difficult when many completed surveys exist.
 
-From a QA standpoint, the system is:
-- **functionally stable**
-- **secure at the access control level**
-- but **incomplete in historical data usability features**
+**Type:**
+UX / Missing Behavior
+
+**Severity:**
+Medium 🟡
 
 ---
 
-## 11. Recommendations
+### 3. Inline display of survey details reduces readability
 
-To fully align with the Use Case requirements, the following improvements are recommended:
+**Observed behavior:**
 
-- include survey submission date and status in history view
-- implement search functionality for completed surveys
-- add filtering by date range and/or survey title
-- consider restructuring detail view into a dedicated page or modal
-- improve UI separation between list and detailed response view
+* Detailed responses appear directly beneath the survey list instead of opening in a dedicated page or modal
+
+**Impact:**
+Weak separation between navigation and detailed content.
+
+**Type:**
+UX / Interface Design
+
+**Severity:**
+Low 🟢
+
+---
+
+## Special notes
+
+* Authentication-based access control works correctly
+* Students cannot access surveys belonging to other users
+* Historical responses persist correctly across sessions
+* Completed surveys remain accessible after refresh
+* Export functionality is correctly unavailable for Student role
+
+These areas are compliant with the expected use case behavior.
+
+---
+
+## Evidence
+
+Observed during live testing through:
+
+* completed survey navigation
+* session persistence testing
+* refresh testing
+* access restriction verification
+
+Screenshots captured during:
+
+* “My Completed Surveys” navigation
+* response detail visualization
+* history persistence checks
+
+---
+
+## My thoughts / questions
+
+* Should survey history support long-term navigation with filters?
+* Should response details open in a dedicated page instead of inline expansion?
+* Is metadata intentionally omitted or not yet implemented?
+* Will future versions include export/search functionality for students?
+
+---
+
+## Action taken
+
+* Documented missing historical navigation features
+* Verified access control behavior
+* Continued persistence and usability testing
+
+---
+
+## Conclusion
+
+The system provides a stable and secure implementation of the Student feedback history workflow. Core functionalities such as authentication, response retrieval, and session persistence behave correctly.
+
+However, the history management experience remains incomplete due to:
+
+* missing metadata
+* absence of search/filter capabilities
+* limited readability of detailed response visualization
+
+From a QA perspective, the system is:
+
+* functionally stable
+* secure at access-control level
+* but incomplete regarding historical usability features
+
+---
