@@ -1,184 +1,208 @@
-# TEST REPORT — PROVIDE FEEDBACK (SURVEY COMPLETION)
-
-## 1. Introduction
-
-This document presents the results of functional and behavioral testing performed on the **“Provide Feedback”** use case within the Student Survey Application.
-
-The objective is to verify whether the system correctly supports:
-- survey access
-- survey completion
-- data persistence
-- validation rules
-- submission workflow
-- compliance with the specified Use Case requirements
+# TEST NOTES — Provide Feedback (Survey Completion)
 
 ---
 
-## 2. Use Case Reference
+## What I am testing
 
-### Core Requirements
+I am testing:
 
-The system must allow a Student to:
+> Student survey completion workflow (“Provide Feedback” use case)
 
-- access available surveys after authentication
-- complete surveys containing multiple question types:
-  - multiple choice
-  - rating scales
-  - open-ended questions
-- navigate between questions
-- save progress automatically during completion
-- resume incomplete surveys after interruption
-- submit completed surveys successfully
-- receive a confirmation message after submission
+The objective is to verify:
+
+* survey accessibility
+* question handling
+* validation behavior
+* response persistence
+* submission workflow
+* compliance with the documented use case
 
 ---
 
-## 3. Observed System Behavior Overview
+## What I did (steps)
 
-The system behavior was analyzed during multiple test scenarios. The following global behavior was observed:
+1. Logged into the application as Student
+2. Opened the dashboard
+3. Accessed available surveys from the navigation menu
+4. Opened multiple surveys containing:
 
-- Surveys are accessible after login via dashboard navigation
-- Surveys are structured into sections (not a single continuous form)
-- Submission is possible only when all required fields are completed
-- Confirmation message is displayed after successful submission
-- Completed surveys are locked and cannot be modified
-
----
-
-## 4. Functional Analysis (Use Case vs Implementation)
-
-| Requirement | Observed Behavior | Status |
-|--------------|------------------|--------|
-| Survey access after login | Available via dashboard | ✅ Compliant |
-| Survey listing | Available with categorized sections | ⚠️ Partial divergence |
-| Question types support | Functional (MCQ, text, ratings) | ✅ Compliant |
-| Navigation between questions | Limited (section-based navigation) | ⚠️ Partial |
-| Required field validation | Enforced before submission | ✅ Compliant |
-| Autosave of progress | Not implemented | ❌ Not compliant |
-| Resume incomplete survey | Not implemented | ❌ Not compliant |
-| Progress persistence | Not implemented | ❌ Not compliant |
-| Submission confirmation | Displayed successfully | ✅ Compliant |
-| Post-submission immutability | Correctly enforced | ✅ Compliant |
-| Notification of incomplete surveys | Not implemented | ❌ Not compliant |
+   * text questions
+   * multiple choice questions
+   * rating-based questions
+5. Started answering survey questions
+6. Navigated between survey sections
+7. Refreshed the page before submission
+8. Logged out during completion
+9. Reopened the survey after interruption
+10. Attempted final submission
+11. Checked completed survey behavior after submission
 
 ---
 
-## 5. Key Functional Issues Identified
+## What I noticed
 
-### 🔴 1. No Autosave Mechanism
-
-The system does not persist user input during survey completion.
-
-- Refreshing the page results in complete data loss
-- Navigating away resets the survey state
-- No intermediate storage is performed
-
-**Impact:** Critical data loss risk during user interaction
-
----
-
-### 🔴 2. Loss of Survey Progress After Interruption
-
-Survey responses are not retained after:
-- page refresh
-- logout
-- browser closure
-
-**Impact:** Users must restart surveys from the beginning
+* Surveys are accessible only after authentication
+* Surveys are displayed through categorized sections instead of one continuous form
+* Required fields are enforced before submission
+* Submission confirmation is displayed successfully
+* Completed surveys become read-only after submission
+* Refreshing the page removes unsaved responses
+* Logging out during completion causes total progress loss
+* No autosave mechanism exists
+* No “resume incomplete survey” functionality exists
+* No notification or indicator exists for unfinished surveys
 
 ---
 
-### 🔴 3. No Resume Capability for Incomplete Surveys
+## What should have happened
 
-The system does not allow continuation of partially completed surveys.
+Based on the documented use case:
 
-- No saved state is restored
-- No "continue survey" option exists
-- Survey is treated as new on each access
-
-**Impact:** Breaks continuity of user workflow
-
----
-
-### 🔴 4. No Notification for Incomplete Surveys
-
-Users are not informed of:
-- pending surveys in progress
-- unfinished submissions
-
-**Impact:** Reduced visibility and poor user guidance
+* Survey progress should be automatically saved during completion
+* Users should be able to resume incomplete surveys after interruption
+* Partial responses should persist after refresh or logout
+* The system should indicate unfinished surveys to the student
+* Navigation between questions should support a continuous completion workflow
 
 ---
 
-### ⚠️ 5. Section-Based Survey Structure
+## Is this a problem?
 
-Surveys are not presented as a continuous form but as:
-- grouped sections with separate links
-
-**Impact:** Divergence from expected linear survey flow defined in the Use Case
+Yes
 
 ---
 
-## 6. Security and Data Integrity Observations
+## Summary of issues
 
-- Submission validation is correctly enforced
-- Required fields cannot be bypassed
-- Duplicate submissions are prevented
-- Completed surveys are locked from modification
+### 1. Missing autosave mechanism
 
-These behaviors are compliant with expected security constraints.
+Survey progress is not persisted during completion.
 
----
+**Observed behavior:**
 
-## 7. User Experience Observations
+* Refresh removes all unsaved data
+* Leaving the page resets progress
 
-- Interface is responsive and usable across devices
-- Navigation between surveys is functional
-- Error messages are displayed when validation fails
+**Impact:**
+High risk of data loss during survey completion.
 
-However:
-- lack of autosave significantly impacts usability
-- lack of progress recovery reduces user confidence
+**Type:**
+Functional / Data Persistence
 
----
-
-## 8. Compliance Summary
-
-The system is partially compliant with the Use Case.
-
-### Fully Compliant Areas
-- authentication-dependent access
-- survey submission workflow
-- validation of required fields
-- final confirmation after submission
-- prevention of duplicate submissions
-
-### Non-Compliant Areas
-- autosave functionality
-- survey progress persistence
-- resume incomplete survey feature
-- incomplete survey notification system
+**Severity:**
+High
 
 ---
 
-## 9. Conclusion
+### 2. No resume capability for incomplete surveys
 
-While the system successfully implements the core survey submission workflow, it lacks critical state management features required by the Use Case.
+**Observed behavior:**
 
-The absence of autosave and resume mechanisms represents the most significant functional gap, directly impacting data integrity and user experience.
+* Interrupted surveys restart from the beginning
+* No partial state restoration exists
 
-From a QA perspective, the system demonstrates:
-- functional correctness at submission level
-- but incomplete lifecycle management of survey interactions
+**Impact:**
+Breaks continuity of user workflow.
+
+**Type:**
+Workflow / UX
+
+**Severity:**
+High
 
 ---
 
-## 10. Recommendation
+### 3. Missing incomplete survey notification
 
-To align with the Use Case requirements, the following improvements are recommended:
+**Observed behavior:**
 
-- implement real-time autosave of responses
-- introduce persistent survey state storage
-- enable resume functionality for incomplete surveys
-- add dashboard indicators for pending surveys
-- improve UX feedback for interrupted sessions
+* No visual indicator for unfinished surveys
+* No reminder or pending status shown
+
+**Impact:**
+Reduces usability and workflow visibility.
+
+**Type:**
+UX / Missing Behavior
+
+**Severity:**
+Medium
+
+---
+
+### 4. Section-based navigation differs from expected linear workflow
+
+**Observed behavior:**
+
+* Surveys are split into sections with separate access links
+
+**Impact:**
+Partial divergence from the expected survey completion flow described in the use case.
+
+**Type:**
+UX / Workflow Design
+
+**Severity:**
+Low
+
+---
+
+## Special notes
+
+* Validation of required fields is correctly enforced
+* Duplicate submissions appear prevented
+* Completed surveys cannot be modified afterward
+* Submission confirmation workflow functions correctly
+
+These areas are compliant with the expected use case behavior.
+
+---
+
+## Evidence
+
+Observed during live testing through:
+
+* dashboard navigation
+* survey completion workflow
+* refresh/logout interruption tests
+* post-submission verification
+
+Screenshots captured during:
+
+* survey access
+* validation testing
+* submission workflow
+* interruption scenarios
+
+---
+
+## My thoughts / questions
+
+* Should incomplete surveys be stored automatically after each question?
+* Is section-based navigation intentionally replacing a continuous survey flow?
+* Should interrupted sessions generate a recovery mechanism?
+* Is temporary response persistence planned in future iterations?
+
+---
+
+## Action taken
+
+* Documented inconsistencies during live testing
+* Identified missing persistence features
+* Continued workflow testing across multiple survey scenarios
+
+---
+
+## Conclusion
+
+The system correctly implements the final survey submission workflow and validation constraints. However, important lifecycle management features expected by the use case are missing.
+
+The most significant gaps are:
+
+* absence of autosave
+* lack of interruption recovery
+* absence of incomplete survey persistence
+
+These issues directly impact usability, workflow continuity, and data reliability during survey completion.
+
+---
