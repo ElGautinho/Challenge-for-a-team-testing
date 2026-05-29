@@ -1,146 +1,217 @@
-# TEST REPORT — CREATE ACCOUNT (STUDENT)
-
-## 1. Introduction
-
-This document presents the results of the tests performed on the **“Create Account”** use case for the *Student* role, as part of the **Student Survey Application** project.
-
-The objective of these tests is to verify the compliance of the current implementation with the functional and non-functional requirements defined in the Use Case, particularly in terms of:
-- data validation  
-- collection of role-specific information  
-- security  
-- consistency of the registration process  
+# TEST NOTES — Create Account (Student Role)
 
 ---
 
-## 2. Use Case Reference
+## What I am testing
 
-### Key Use Case Requirements:
+I am testing:
 
-The system must allow:
+> Student account creation workflow and registration validation behavior
 
-- role selection (Student / Instructor)  
-- for the Student:
-  - input of academic level  
-  - selection of programming languages  
-- validation of entered data  
-- verification of email uniqueness  
-- secure storage of information  
-- sending of a confirmation email  
-- setting account status to *pending approval*  
-- restricted access before administrator validation  
+The objective is to verify:
+
+* registration process consistency
+* collection of required student information
+* validation behavior
+* email handling
+* password setup workflow
+* compliance with the documented Create Account use case
 
 ---
 
-## 3. Test Scope
+## What I did (steps)
 
-The tests covered the following elements:
+1. Opened the application homepage
+2. Clicked on “Register as a student”
+3. Observed the registration form fields
+4. Entered:
 
-- navigation to the registration interface  
-- form behavior  
-- field validation  
-- password creation process  
-- email handling  
-- compliance with Student role requirements  
-
----
-
-## 4. Observed User Experience Summary
-
-The actual observed process is as follows:
-
-1. The user accesses the homepage  
-2. Clicks on “Register as a student”  
-3. The system only requests:
-   - Username  
-   - Email  
-4. An email is sent to create the password  
-5. The user sets their password via a link  
-6. The account is created  
+   * username
+   * email address
+5. Submitted the registration form
+6. Opened the email received from the system
+7. Followed the password creation link
+8. Created a password
+9. Attempted login after account creation
+10. Repeated the process with invalid email formats and weak passwords
 
 ---
 
-## 5. Comparative Analysis (Use Case vs Reality)
+## What I noticed
 
-| Use Case Requirement | Current Implementation | Status |
-|---------------------|----------------------|--------|
-| Role selection | Present | ✅ Compliant |
-| Academic level input | Missing | ❌ Not compliant |
-| Programming languages selection | Missing | ❌ Not compliant |
-| Valid email verification | Partial (fake emails accepted) | ⚠️ Partial |
-| Email uniqueness | Not clearly verified | ⚠️ Uncertain |
-| Confirmation email | Present | ✅ Compliant |
-| Pending approval status | Not visible | ❌ Not compliant |
-| Access restriction before admin approval | Not observed | ❌ Not compliant |
+* The registration form only requests:
 
----
-
-## 6. Identified Issues
-
-### 🔴 1. Missing Student Fields
-
-The registration form does not collect essential information defined in the Use Case:
-
-- academic level  
-- programming languages  
-
-👉 Impact:
-- incomplete data  
-- inability to categorize users  
-- loss of business value  
+  * username
+  * email address
+* Academic level is not requested
+* Programming languages are not requested
+* Fake or invalid email formats can still be accepted
+* Password creation is handled through an email link
+* Weak passwords are accepted
+* No password confirmation field exists
+* No visible “pending approval” status is shown
+* No visible restriction before administrator validation was observed
 
 ---
 
-### 🔴 2. Lack of strict email validation
+## What should have happened
 
-The system accepts invalid email addresses during registration.
+Based on the documented use case:
 
-👉 Impact:
-- invalid accounts  
-- communication issues  
-- poor data quality  
+* The Student registration form should collect:
 
----
-
-### 🟡 3. Weak password management
-
-- weak passwords are accepted  
-- no confirmation via re-entry  
-
-👉 Impact:
-- reduced security  
+  * academic level
+  * programming languages
+* Email validation should reject invalid addresses
+* Password policy should enforce stronger security rules
+* The system should clearly indicate that the account is pending approval
+* Access should remain restricted until administrator validation
 
 ---
 
-### 🟡 4. Missing visible “Pending Approval” status
+## Is this a problem?
 
-The system does not clearly indicate that the account is awaiting validation.
-
-👉 Impact:
-- user confusion  
-- non-compliance with the Use Case  
+Yes
 
 ---
 
-## 7. Conclusion
+## Summary of issues
 
-The current implementation of the registration process presents several significant gaps compared to the defined Use Case.
+### 1. Missing student-specific registration fields
 
-The main shortcomings concern:
-- collection of Student-specific data  
-- data validation  
-- certain security aspects  
+**Observed behavior:**
 
-Improvements are required to ensure:
-- functional compliance  
-- data quality  
-- system security  
+* Academic level field is missing
+* Programming languages selection is missing
+
+**Impact:**
+The system cannot collect essential student profile data required by the use case.
+
+**Type:**
+Missing Functionality / Business Logic
+
+**Severity:**
+High 🔴
 
 ---
 
-## 8. Recommendations
+### 2. Weak email validation behavior
 
-- Add required fields (academic level, programming languages)  
-- Strengthen email validation  
-- Implement a visible “pending approval” status  
-- Improve password policy  
-- Add password confirmation field  
+**Observed behavior:**
+
+* Invalid or fake email formats can still be accepted during registration
+
+**Impact:**
+Creates unreliable accounts and reduces overall data quality.
+
+**Type:**
+Validation / Data Quality
+
+**Severity:**
+High 🔴
+
+---
+
+### 3. Weak password setup workflow
+
+**Observed behavior:**
+
+* Weak passwords are accepted
+* No password confirmation field exists
+
+**Impact:**
+Reduces account security and increases risk of user input mistakes.
+
+**Type:**
+Security / Validation
+
+**Severity:**
+Medium 🟡
+
+---
+
+### 4. Missing visible approval workflow
+
+**Observed behavior:**
+
+* No visible “pending approval” state is displayed
+* No clear restriction before admin validation is observed
+
+**Impact:**
+Creates confusion regarding account activation status and diverges from the expected approval workflow.
+
+**Type:**
+Workflow / UX Consistency
+
+**Severity:**
+Medium 🟡
+
+---
+
+## Special notes
+
+* Registration navigation works correctly
+* Password creation email is successfully sent
+* Password setup link functions correctly
+* Student registration remains operational at a basic workflow level
+
+However, the implementation is only partially aligned with the documented business requirements.
+
+---
+
+## Evidence
+
+Observed during:
+
+* registration form testing
+* invalid input testing
+* password setup workflow testing
+* authentication verification after registration
+
+Screenshots captured during:
+
+* registration interface
+* password setup process
+* invalid email testing
+* account creation workflow
+
+---
+
+## My thoughts / questions
+
+* Is the missing academic profile information intentionally postponed for future implementation?
+* Should approval workflow visibility be exposed directly to the user?
+* Should stronger password policies be enforced at creation stage?
+
+---
+
+## Action taken
+
+* Documented validation inconsistencies
+* Identified missing business fields
+* Verified email/password workflow behavior
+* Continued testing of registration edge cases
+
+---
+
+## Conclusion
+
+The registration workflow is functional at a basic operational level:
+
+* users can register
+* receive password setup emails
+* create accounts successfully
+
+However, several important business and validation requirements are missing, particularly regarding:
+
+* student profile information
+* email validation
+* password security
+* approval workflow visibility
+
+From a QA perspective, the Create Account workflow is:
+
+* operational
+* but only partially compliant with the documented use case requirements
+
+---
