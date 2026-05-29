@@ -1,140 +1,200 @@
-# TEST REPORT — LOGIN
-
-## 1. Introduction
-
-This document presents the results of the tests performed on the **“Login”** use case for the *Student* role, as part of the **Student Survey Application** project.
-
-The objective is to evaluate the compliance of the authentication system with the requirements defined in the Use Case, particularly in terms of:
-- authentication security  
-- handling of login attempts  
-- access control  
-- session management  
-- protection against abuse  
+# TEST NOTES — Login (Student Role)
 
 ---
 
-## 2. Use Case Reference
+## What I am testing
 
-### Key Requirements:
+I am testing:
 
-The system must:
+> Student authentication workflow (“Login” use case)
 
-- securely authenticate users  
-- verify credentials (username/email + password)  
-- redirect users to a role-based dashboard  
-- track failed login attempts  
-- temporarily lock the account:
-  - after 3 failed attempts → 1 minute  
-  - after 5 failed attempts → 3 minutes  
-- protect against attacks (brute force, user enumeration)  
-- securely handle password reset processes  
+The objective is to verify:
 
----
-
-## 3. Test Scope
-
-The tests covered:
-
-- login with valid and invalid credentials  
-- handling of login errors  
-- behavior after multiple failed attempts  
-- access control to protected pages  
-- session management (login, logout, persistence)  
-- “forgot password” functionality  
-- system behavior under edge cases  
+* authentication behavior
+* access control
+* failed login handling
+* session management
+* abuse prevention mechanisms
+* compliance with security-related use case requirements
 
 ---
 
-## 4. Observed User Experience
+## What I did (steps)
 
-The actual observed behavior is as follows:
+1. Opened the login page
+2. Attempted login with valid credentials
+3. Attempted login with:
 
-1. The user accesses the login page  
-2. Enters username or email and password  
-3. In case of error:
-   - specific message is displayed depending on the error type  
-4. In case of success:
-   - user is redirected to the dashboard  
-5. Logout redirects the user to the homepage  
-6. No account suspension occurs after multiple failed attempts  
-
----
-
-## 5. Comparative Analysis (Use Case vs Reality)
-
-| Use Case Requirement | Current Implementation | Status |
-|---------------------|----------------------|--------|
-| User authentication | Functional | ✅ Compliant |
-| Dashboard redirection | Functional | ✅ Compliant |
-| Failed attempts handling | Missing | ❌ Not compliant |
-| Lock after 3/5 attempts | Missing | ❌ Not compliant |
-| Generic error messages | Not respected | ❌ Not compliant |
-| Brute force protection | Missing | ❌ Not compliant |
-| Access control (protected pages) | Functional | ✅ Compliant |
-| Session management (login/logout) | Functional | ✅ Compliant |
-| Password reset rate limiting | Missing | ❌ Not compliant |
+   * wrong password
+   * invalid username
+   * invalid email
+4. Repeated failed login attempts multiple times
+5. Checked whether account lock mechanisms existed
+6. Tested access to protected pages without authentication
+7. Logged in successfully and verified dashboard access
+8. Logged out and verified session termination
+9. Tested password reset functionality multiple times
+10. Checked system behavior after refresh and navigation
 
 ---
 
-## 6. Identified Issues
+## What I noticed
 
-### 🔴 1. No account lock after failed login attempts
-
-The system does not limit login attempts.
-
-👉 **Impact:**
-- vulnerable to brute-force attacks  
-- high risk of account compromise  
-
----
-
-### 🔴 2. Information disclosure via error messages (User Enumeration)
-
-The system displays different messages depending on the error:
-
-- user does not exist  
-- invalid email  
-- incorrect password  
-
-👉 **Why this is a problem:**
-
-This allows an attacker to:
-- identify existing accounts  
-- target specific users  
-
-👉 **Impact:**
-- critical security vulnerability  
-- exposure of user information  
+* Login with valid credentials works correctly
+* Successful authentication redirects the user to the dashboard
+* Different error messages are displayed depending on the failure type
+* No temporary account lock occurs after repeated failed attempts
+* No brute-force protection mechanism is visible
+* Protected pages correctly require authentication
+* Logout redirects the user to the homepage
+* Password reset requests can be triggered repeatedly without limitation
+* Session management behaves correctly during login/logout flow
 
 ---
 
-### 🟡 3. No rate limiting on password reset requests
+## What should have happened
 
-The system allows unlimited password reset email requests.
+Based on the documented use case:
 
-👉 **Impact:**
-- user spam  
-- system abuse  
-- email service overload  
+* The system should temporarily lock accounts after:
 
----
-
-## 7. Conclusion
-
-The authentication system works at a basic functional level (login, redirection, session), but presents critical security gaps.
-
-The main issues relate to:
-- protection against attacks  
-- error handling  
-- abuse prevention  
-
-Improvements are required to meet expected security standards.
+  * 3 failed attempts
+  * 5 failed attempts
+* Error messages should remain generic to avoid user enumeration
+* Password reset requests should be rate-limited
+* Brute-force protection mechanisms should exist
+* Authentication and protected-page access should remain secure and controlled
 
 ---
 
-## 8. Recommendations
+## Is this a problem?
 
-- Implement account lockout after failed attempts  
-- Use generic error messages  
-- Add rate limiting to password reset  
-- Strengthen overall security (e.g. CAPTCHA, logging, monitoring)  
+Yes
+
+---
+
+## Summary of issues
+
+### 1. Missing account lock mechanism after failed login attempts
+
+**Observed behavior:**
+
+* Unlimited failed login attempts are allowed
+* No temporary suspension occurs
+
+**Impact:**
+Exposes the system to brute-force attacks and credential guessing.
+
+**Type:**
+Security / Authentication
+
+**Severity:**
+High 🔴
+
+---
+
+### 2. Information disclosure through authentication error messages
+
+**Observed behavior:**
+
+* The system displays different messages for:
+
+  * invalid username
+  * invalid email
+  * incorrect password
+
+**Impact:**
+Allows attackers to identify valid accounts and perform targeted attacks.
+
+**Type:**
+Security / User Enumeration
+
+**Severity:**
+High 🔴
+
+---
+
+### 3. Missing rate limiting on password reset requests
+
+**Observed behavior:**
+
+* Password reset requests can be triggered repeatedly without restriction
+
+**Impact:**
+May lead to:
+
+* spam
+* abuse
+* unnecessary email load
+
+**Type:**
+Security / Abuse Prevention
+
+**Severity:**
+Medium 🟡
+
+---
+
+## Special notes
+
+* Authentication itself works correctly
+* Dashboard redirection functions properly
+* Protected pages are inaccessible without login
+* Session creation and logout behavior are stable
+
+These areas are compliant with the expected use case behavior.
+
+---
+
+## Evidence
+
+Observed during live testing through:
+
+* valid/invalid authentication attempts
+* repeated login failures
+* protected-page access testing
+* password reset testing
+* session persistence verification
+
+Screenshots captured during:
+
+* login workflow
+* authentication errors
+* dashboard redirection
+* password reset scenarios
+
+---
+
+## My thoughts / questions
+
+* Should CAPTCHA or additional protection mechanisms be implemented?
+* Is login attempt tracking planned for future versions?
+* Why are authentication error messages exposing account existence?
+* Should password reset requests include cooldown restrictions?
+
+---
+
+## Action taken
+
+* Documented authentication inconsistencies
+* Identified missing security protections
+* Continued access-control and session testing
+
+---
+
+## Conclusion
+
+The authentication workflow is functionally operational for standard login and session management. However, several important security protections expected by the use case are missing.
+
+The main weaknesses are:
+
+* absence of login attempt limitation
+* exposure of account existence through error messages
+* lack of password reset protection
+
+From a QA perspective, the system is:
+
+* functionally stable for authentication flow
+* but insufficiently protected against abuse and enumeration attacks
+
+---
