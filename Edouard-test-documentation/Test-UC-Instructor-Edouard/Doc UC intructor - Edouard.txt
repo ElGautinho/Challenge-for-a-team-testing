@@ -1,163 +1,251 @@
-## UC-INSTRUCTOR QA TEST REPORT — SURVEY MANAGEMENT SYSTEM
+# TEST NOTES — Instructor Survey Management Workflow
 
 ---
 
-# 1. Context and Objective
+## What I am testing
 
-This report documents the testing of the Instructor survey management workflow within the system, based on the following use cases:
+I am testing:
+
+> Instructor survey management workflow and cross-role survey lifecycle behavior
+
+The objective is to verify:
+
+* survey creation and publication
+* question management
+* student response workflow
+* instructor response monitoring
+* data consistency between Instructor and Student roles
+* survey lifecycle behavior after edits, deletion, and restoration
+
+The testing covers:
 
 * UC-Manage Survey
 * UC-Manage Question Type
-* UC-Provide Feedback (Student)
+* UC-Provide Feedback
 * UC-Review Past Feedback
 
-The objective was to evaluate:
+---
 
-* survey creation and lifecycle
+## What I did (steps)
+
+1. Logged in as Instructor
+2. Created and published surveys
+3. Added multiple questions to surveys:
+
+   * text questions
+   * multiple choice questions
+   * true/false questions
+4. Linked questions to surveys
+5. Logged in with multiple Student accounts
+6. Submitted survey responses
+7. Verified responses in Instructor “Survey Responses” view
+8. Modified survey titles and question content
+9. Deleted questions and surveys
+10. Verified Student completed history after deletion
+11. Restored deleted surveys and questions
+12. Tested preview functionality
+13. Tested refresh behavior before submission
+
+---
+
+## What I noticed
+
+* Survey creation and publication work correctly
+* Questions can be created and linked successfully
+* Multiple question types behave correctly
+* Students can access and complete surveys
+* Responses are stored and visible to the Instructor
+* Role separation works correctly between Student and Instructor accounts
+* Surveys/questions can be restored after deletion
+* Empty surveys and empty questions can still be published
+* Unsaved student responses are lost after refresh
+* Deleted questions disappear from Student history but remain in Instructor response history
+* Deleted surveys disappear for Instructor but remain in Student completed history
+* Instructor preview mode does not simulate Student experience
+
+---
+
+## What should have happened
+
+Based on the documented use cases:
+
+* Mandatory fields should be validated before publishing surveys/questions
+* Student progress should persist before submission
+* Historical survey/question behavior should remain consistent across roles
+* Deleted entities should follow a unified visibility policy
+* Instructor preview should provide a student-like rendering of surveys
+
+---
+
+## Is this a problem?
+
+Yes
+
+---
+
+## Summary of issues
+
+### 1. Missing validation on mandatory fields
+
+**Observed behavior:**
+
+* Surveys without titles can be published
+* Questions without content can be saved and published
+
+**Impact:**
+Creates structurally invalid surveys and inconsistent data states.
+
+**Type:**
+Validation / Data Integrity
+
+**Severity:**
+High 🔴
+
+---
+
+### 2. Missing persistence for incomplete student responses
+
+**Observed behavior:**
+
+* Refreshing the page removes all unsaved responses
+* No autosave or recovery mechanism exists
+
+**Impact:**
+Causes complete loss of student progress during survey completion.
+
+**Type:**
+Workflow / Data Persistence
+
+**Severity:**
+High 🔴
+
+---
+
+### 3. Inconsistent historical question behavior after deletion
+
+**Observed behavior:**
+
+* Deleted questions disappear from Student completed history
+* Instructor response history still contains associated responses
+
+**Impact:**
+Creates different historical states between Student and Instructor views.
+
+**Type:**
+Data Consistency / Historical Integrity
+
+**Severity:**
+Medium 🟡
+
+---
+
+### 4. Inconsistent survey deletion behavior across roles
+
+**Observed behavior:**
+
+* Deleted surveys disappear for Instructor
+* Student completed history still displays deleted surveys
+
+**Impact:**
+Causes divergence between Instructor and Student lifecycle states.
+
+**Type:**
+Workflow Consistency
+
+**Severity:**
+Medium 🟡
+
+---
+
+### 5. Missing instructor preview simulation
+
+**Observed behavior:**
+
+* Instructor preview mode does not render surveys as a Student view
+
+**Impact:**
+Limits validation of final survey experience before publication.
+
+**Type:**
+UX / Missing Feature
+
+**Severity:**
+Low 🟢
+
+---
+
+## Special notes
+
+* Survey creation workflow is operational
+* Question linking works correctly
+* Student submissions are correctly stored
+* Response monitoring functions in real time
+* Role-based access control is correctly enforced
+* Restoration functionality behaves consistently after republishing
+
+These areas are compliant with the expected use case behavior.
+
+---
+
+## Evidence
+
+Observed during live testing through:
+
+* survey creation workflow
+* question management workflow
+* student response submission
+* deletion/restoration scenarios
+* multi-role consistency testing
+
+Screenshots captured during:
+
+* survey publication
+* question creation
+* student submissions
+* survey responses
+* deletion/restoration workflows
+
+---
+
+## My thoughts / questions
+
+* Should deleted surveys remain visible in student historical records?
+* Should historical responses preserve deleted questions as immutable snapshots?
+* Is autosave planned for future survey versions?
+* Should Instructor preview fully emulate Student rendering?
+
+---
+
+## Action taken
+
+* Documented cross-role inconsistencies
+* Identified missing validation mechanisms
+* Verified lifecycle behavior after deletion/restoration
+* Continued multi-role testing scenarios
+
+---
+
+## Conclusion
+
+The system provides a functional end-to-end workflow for survey management, response collection, and result monitoring.
+
+Core survey operations behave correctly, including:
+
+* survey creation
 * question management
-* student response workflow
-* data consistency across roles (student/instructor)
-* system behavior under modification and deletion scenarios
+* response submission
+* role separation
 
-Testing was performed using multiple student accounts and one instructor account.
-
----
-
-# 2. Scope of Testing
-
-## 2.1 Instructor Functional Areas
-
-* Survey creation
-* Survey editing
-* Survey deletion and restoration
-* Question creation and association
-* Survey publication
-* Response monitoring
-
-## 2.2 Student Functional Areas
-
-* Survey access
-* Response submission
-* Response persistence
-* Completed survey history
-
-## 2.3 Data Flow Validation
-
-* Survey → Questions → Student Responses → Instructor View
-
----
-
-# 3. Test Execution Summary
-
-## 3.1 Survey and Question Management
-
-* Surveys were successfully created and published.
-* Questions were created and linked to surveys.
-* Multiple question types were tested (text, multiple choice, true/false).
-
-## 3.2 Student Workflow
-
-* Students were able to:
-
-  * access surveys
-  * submit responses
-  * view completed surveys
-* Responses were correctly stored and displayed in the instructor interface.
-
-## 3.3 Instructor Responses
-
-* Survey responses were accessible in real time.
-* Data between student submissions and instructor view was generally synchronized.
-
----
-
-# 4. Observed Inconsistencies
-
-## 4.1 Inconsistency in Validation Behavior
-
-The system allows publication of surveys and questions even when mandatory fields are empty.
-
-* Surveys without titles are accepted.
-* Questions without content are accepted.
-
-This creates structural inconsistencies in survey definitions.
-
----
-
-## 4.2 Inconsistency in Response Persistence
-
-Student responses are not preserved when the page is refreshed or when the survey is left before submission.
-
-* All unsaved data is lost.
-* No recovery mechanism is available for incomplete submissions.
-
-This leads to inconsistencies in expected user progress behavior.
-
----
-
-## 4.3 Inconsistency in Historical Question Handling
-
-After deletion of a question:
-
-* Student completed survey view no longer displays the question.
-* Instructor response history still retains the associated data.
-
-This creates a mismatch between student and instructor historical views.
-
----
-
-## 4.4 Inconsistency in Survey Deletion Behavior
-
-After survey deletion:
-
-* The survey disappears from the instructor survey list.
-* Student completed history still retains the survey entry.
-
-This results in divergent states between user roles.
-
----
-
-## 4.5 Inconsistency in Preview Access
-
-Instructor preview functionality does not provide a student-like view.
-
-* Preview access is restricted.
-* No simulation mode is available.
-
-This limits validation of the final student experience.
-
----
-
-# 5. Compliance with Use Cases
-
-## Functional Areas Working Correctly
-
-* Survey creation ✔
-* Question management ✔
-* Student submission ✔
-* Role-based access control ✔
-* Response storage ✔
-
-## Areas Showing Deviations
-
-* Validation of mandatory fields
-* Persistence of incomplete student responses
-* Consistency of historical data across roles
-* Preview experience for instructors
-
----
-
-# 6. Conclusion
-
-The system provides a functional end-to-end survey workflow, covering creation, response collection, and result visualization.
-
-However, several inconsistencies are observed in:
+However, several important inconsistencies remain regarding:
 
 * validation enforcement
-* data persistence behavior
-* historical data alignment between roles
-* preview experience limitations
+* incomplete response persistence
+* historical data consistency
+* preview behavior
 
-### Key recommendation:
+From a QA perspective, the platform is:
 
-Harmonize validation rules and unify data persistence logic across student and instructor modules to ensure consistent behavior throughout the survey lifecycle.
+* operational at workflow level
+* but partially inconsistent during advanced survey lifecycle scenarios
+
+---
