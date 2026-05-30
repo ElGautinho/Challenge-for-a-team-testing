@@ -2,7 +2,6 @@
 
 | Field | Details |
 | --- | --- |
-| **Tester** | Mugisho Merci |
 | **Application** | MKB Survey Web Application |
 | **Use Case** | UC-Create_Account |
 | **Reference** | `doc/usecase-diagram/usecases/UC-Login/sub_UC-Login/UC-Create_Account.md` |
