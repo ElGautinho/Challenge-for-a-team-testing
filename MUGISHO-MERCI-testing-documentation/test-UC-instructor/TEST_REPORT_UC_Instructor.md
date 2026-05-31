@@ -59,14 +59,7 @@ According to `UC-ManageSurveys.md`, the instructor should be able to:
 - I did not see clear evidence that opening and closing dates are validated.
 - I did not see cohort or instructor-specific management details that are mentioned in some use case texts.
 
-## 6. What I propose as solution
-
-- Add a clear **Preview Survey** button on the survey creation/edit screen.
-- Add visible **Delete** and **Save** buttons for survey management.
-- Add validation messages for **start date** and **end date** when creating a survey.
-- Improve the instructor dashboard labels to show **Instructor Surveys**, **My Questions**, and **Responses**.
-- Use the exact terms from the UC document to make the navigation clearer.
-- Add a confirmation message that instructors can only view responses for their own surveys.
+## 6on message that instructors can only view responses for their own surveys.
 
 ## 7. Additional improvements for a stronger and more advanced platform
 
@@ -81,7 +74,14 @@ According to `UC-ManageSurveys.md`, the instructor should be able to:
 - Add **performance monitoring** for survey loading and response review so the platform remains fast when data grows.
 - Add **UI consistency improvements** to avoid confusion between instructor, question, and response screens.
 - Consider adding **notifications** for instructors when students complete a survey or when a survey reaches its closing date.
-- Add **analytics dashboard elements** for instructors: completion rate, average score, response count, and overdue surveys.
+- Add **analytics dashboard elements** for instructors: completion rate, average score, response count, and overdue surveys.. What I propose as solution
+
+- Add a clear **Preview Survey** button on the survey creation/edit screen.
+- Add visible **Delete** and **Save** buttons for survey management.
+- Add validation messages for **start date** and **end date** when creating a survey.
+- Improve the instructor dashboard labels to show **Instructor Surveys**, **My Questions**, and **Responses**.
+- Use the exact terms from the UC document to make the navigation clearer.
+- Add a confirmati
 
 ---
 
