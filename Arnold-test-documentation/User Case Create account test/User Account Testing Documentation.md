@@ -1,130 +1,69 @@
-# Test Report Documentation – User Account System
+# Test Documentation: Create Account
 
-## Overview
+## 1. What I Tested
 
-This document summarizes the testing results for key user account functionalities, including:
+I tested the account creation functionality to verify that users can successfully register on the platform.
 
-* Account registration
-* Password recovery
-* User login
+I also verified:
 
----
-
-## Issue #5 – Registration Bug
-
-### Description
-
-During the account creation test, multiple issues were identified in the registration process.
-
-### Observed Problems
-
-#### 1. Role Selection Issue
-
-* Only the "Student" role is visible
-* The "Instructor" option is missing
-
-#### 2. Student Form Issue
-
-* When selecting "Student", additional fields do not appear:
-
-  * Academic level
-  * Programming languages
-
-### Expected Behavior
-
-* Both Student and Instructor roles should be available
-* Selecting Student should dynamically display:
-
-  * Academic level field
-  * Programming languages field
-
-### Actual Behavior
-
-* Instructor role is not displayed
-* Student-specific fields are not triggered or displayed
-
-### Status
-
-FAIL
-
-### Possible Causes
-
-* Missing or incorrect frontend rendering (HTML/JS)
-* JavaScript event listener not working (on change of role)
-* Backend not returning full role list
+* Access to the registration form.
+* Role selection (Student or Instructor).
+* Validation of entered information.
+* Handling of duplicate email addresses.
+* Receipt of the confirmation email.
+* Password creation and password recovery processes.
+* Student account registration.
 
 ---
 
-## Issue #15 – Password Recovery Test
+## 2. What I Observed
 
-### Objective
+During testing, I observed that:
 
-To verify the clarity and functionality of the password recovery process.
+* The registration form is easily accessible.
+* Role selection is available during account creation.
+* The system validates some of the information entered, particularly email addresses.
+* A confirmation email is sent after registration.
+* The password recovery process is available and functional.
+* The registration workflow is smooth and easy to follow.
+* Additional student profile information could be further incorporated into the registration process.
 
-### Observations
-
-* Password recovery email is successfully received
-* Reset link is functional
-* Password reset process completes without errors
-
-### Clarity Evaluation
-
-* Email content is clear and understandable
-* User can follow instructions easily
-* No confusion during the process
-
-### Expected Behavior
-
-* Clear instructions in email
-* Simple and direct password reset process
-
-### Status
-
-PASS
-
-### Conclusion
-
-The password recovery system works correctly and provides a good user experience.
+Overall, the functionality allows users to create an account and access the platform effectively.
 
 ---
 
-## Issue #8 – Student Login Test
+## 3. What the Use Case Says
 
-### Observations
+According to the "Create Account" Use Case, the system should:
 
-* Student can log in successfully with valid credentials
-* System redirects to the correct dashboard
-* No errors encountered
+* Allow users to access the registration page.
+* Allow users to select a role (Student or Instructor).
+* Collect the required information for account creation.
+* Validate the information provided by users.
+* Prevent the use of email addresses that are already registered.
+* Send a confirmation email after registration.
+* Place newly created accounts in a pending approval state.
 
-### Status
-
-PASS
-
-### Conclusion
-
-Login functionality is stable and working as expected.
+For students, the Use Case also specifies the collection of additional profile information to better support user management and assignment processes.
 
 ---
 
-## Final Summary
+## 4. What I Propose
 
-| Feature           | Status | Notes                    |
-| ----------------- | ------ | ------------------------ |
-| Registration      | FAIL   | Critical UI/logic issues |
-| Password Recovery | PASS   | Clear and functional     |
-| Student Login     | PASS   | Works correctly          |
+As part of a continuous improvement approach, the following enhancements could be considered:
 
----
+* Enrich the registration form with additional information that helps build a more complete student profile.
+* Provide contextual guidance to assist users while completing the registration process.
+* Improve validation feedback to make error messages clearer and easier to understand.
+* Make the account status more visible after registration so users can better understand the next steps.
+* Provide additional guidance regarding password security requirements during account creation.
 
-## Recommendations
-
-* Fix role selection issue (add Instructor option)
-* Ensure dynamic form rendering for Student fields
-* Verify JavaScript logic for conditional fields
-* Re-test registration after fixes
+These improvements could contribute to a more user-friendly, informative, and efficient registration experience.
 
 ---
 
-## Overall Conclusion
+## 5. Conclusion
 
-The system is partially functional. Core features like login and password recovery are working well, but the registration process requires immediate fixes before deployment.
+Overall, the account creation functionality achieves its primary objective by allowing users to register and begin accessing the platform.
+
+The registration process is generally simple and functional. The proposed improvements mainly focus on enhancing the user experience, improving the quality of collected information, and providing greater clarity throughout the registration workflow.
