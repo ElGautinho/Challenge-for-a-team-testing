@@ -7,7 +7,7 @@ I tested the Manage Survey functionality to verify that instructors can:
 * Create a new survey.
 # screem-short
 
-![alt text](<Capture d’écran (186).png>)
+![alt text](<Capture d’écran (191).png>)
 
 * Edit an existing survey.
 # screem-short
