@@ -1,214 +1,112 @@
-# Validation Documentation for the “Review Past Feedback” Module
+# Validation Report – Review Past Feedback Module
 
-## Introduction
+## 1. What I Tested
 
-This document presents the validation results of the tests performed on the “Review Past Feedback” module of the system.
-The main objective was to verify the proper functioning of all features available to students, instructors, and administrators.
+I tested the **Review Past Feedback** module by verifying the following functionalities:
 
-After conducting different tests, all planned functionalities were executed successfully.
-
----
-
-# 1. User Authentication
-
-### Question:
-
-Does the system allow users to log in correctly before accessing feedback history?
-
-### Response:
-
-Yes.
-The system successfully authenticates users according to their roles (Student, Instructor, Administrator).
-After login, each user can access only the functionalities permitted for their role.
-
-### Result:
-
-Functionality validated successfully.
+* User authentication (Student, Instructor, Administrator).
+* Display of feedback history.
+* Viewing detailed feedback responses.
+* Search and filtering functionality.
+* Handling cases where no results are found.
+* Role-based permission control.
+* Exporting feedback data to CSV and PDF formats.
+* Data security during viewing and exporting operations.
 
 ---
 
-# 2. Display of Feedback History
+## 2. What I Observed
 
-### Question:
+### User Authentication
 
-Does the system correctly display the list of available feedback records?
+The system allows users to log in successfully according to their assigned roles and provides access only to authorized functionalities.
 
-### Response:
+### Feedback History Display
 
-Yes.
-The system successfully retrieves and displays completed surveys associated with each user:
+The system correctly displays feedback history based on user roles:
 
-* Students can view only their own submissions.
+* Students can view only their own feedback submissions.
 * Instructors can view feedback related to surveys they created.
 * Administrators can access all feedback records.
 
-The displayed information includes:
+### Viewing Feedback Details
 
-* survey title,
-* submission date,
-* status,
-* response count.
-
-### Result:
-
-Functionality validated successfully.
-
----
-
-# 3. Viewing Feedback Details
-
-### Question:
-
-Can users view detailed feedback responses?
-
-### Response:
-
-Yes.
-When a user selects a feedback entry, the system correctly displays:
+The system correctly displays detailed feedback information, including:
 
 * survey questions,
-* submitted answers,
+* submitted responses,
 * submission date,
 * related survey information.
 
-### Result:
+### Search and Filtering
 
-Functionality validated successfully.
-
----
-
-# 4. Filtering and Search Functionality
-
-### Question:
-
-Does the system correctly apply filters and search operations?
-
-### Response:
-
-Yes.
-Filters based on:
+Filtering functions work correctly using:
 
 * date range,
 * survey title,
-* student name (for instructors and administrators)
+* student name (for instructors and administrators).
 
-work correctly.
+The displayed results are updated according to the selected criteria.
 
-The system dynamically updates the displayed results according to the selected criteria.
+### No Results Handling
 
-### Result:
+When no matching feedback is found, the system displays an appropriate message and provides an option to clear or reset filters.
 
-Functionality validated successfully.
+### Permission Control
 
----
-
-# 5. Handling No Results Found
-
-### Question:
-
-Does the system respond correctly when no results are found?
-
-### Response:
-
-Yes.
-When a search produces no results, the system displays clear messages such as:
-“No feedback found” or “No matching results.”
-
-The system also provides an option to reset or clear filters.
-
-### Result:
-
-Functionality validated successfully.
-
----
-
-# 6. Permission Control and Security
-
-### Question:
-
-Does the system protect data according to user roles?
-
-### Response:
-
-Yes.
-Role-based access control works correctly.
+Role-based access control works as expected:
 
 * Students cannot access feedback submitted by other students.
 * Instructors can access only surveys they created.
-* Administrators have full access privileges.
+* Administrators have full access to all feedback records.
 
-Any unauthorized access attempt is blocked and recorded in the system logs.
+### Export Functionality
 
-### Result:
+CSV and PDF export features work correctly, and files are downloaded successfully.
 
-Functionality validated successfully.
+### Data Security
 
----
-
-# 7. Exporting Feedback Data
-
-### Question:
-
-Does the system correctly export feedback data?
-
-### Response:
-
-Yes.
-CSV and PDF export functionalities work correctly.
-
-Generated files include:
-
-* individual responses,
-* aggregated statistics,
-* survey information.
-
-Downloads start successfully after file generation.
-
-### Result:
-
-Functionality validated successfully.
+Viewing and exporting operations are protected through secure communication, and important actions are recorded in the system logs for auditing purposes.
 
 ---
 
-# 8. Data Security
+## 3. What the Use Case Says
 
-### Question:
+According to the **Review Past Feedback** use case, the system should:
 
-Is the data secure during viewing and exporting operations?
-
-### Response:
-
-Yes.
-All communications are protected using HTTPS to ensure secure data transmission.
-
-Important actions such as viewing, exporting, and unauthorized access attempts are logged with:
-
-* date,
-* time,
-* user ID,
-* survey ID.
-
-### Result:
-
-Functionality validated successfully.
+* Allow students to review their own feedback history.
+* Allow instructors to review responses for surveys they created.
+* Allow administrators to access feedback across all surveys and users.
+* Provide filtering by date range, survey title, and student name.
+* Display detailed feedback responses.
+* Support exporting feedback data in CSV and PDF formats.
+* Prevent unauthorized access through role-based permissions.
+* Log viewing and exporting activities for auditing purposes.
+* Display appropriate messages when no feedback or matching results are found.
 
 ---
 
-# General Conclusion
+## 4. What I Recommend
 
-After all tests performed on the “Review Past Feedback” module, the obtained results confirm that the system correctly satisfies the functional requirements defined in the specifications.
+After comparing the observed behavior with the use case requirements, no major issues were identified.
 
-All major functionalities were tested successfully, including:
+However, the following improvements could be considered:
 
-* authentication,
-* feedback history display,
-* detailed feedback viewing,
-* filtering,
-* exporting,
-* permission management,
-* data security.
+* Add a clear confirmation message after a successful export.
+* Improve the visibility of active filters.
+* Enhance audit logs with additional details for better traceability.
+* Verify that search and filter preferences are preserved for future sessions, as mentioned in the use case.
 
-The system operates correctly, reliably, and securely.
+---
 
-Final Validation:
-All tests passed successfully.
+## 5. Conclusion
+
+The testing performed confirms that the **Review Past Feedback** module meets the functional requirements defined in the use case.
+
+Core functionalities, including authentication, feedback history display, detailed response viewing, filtering, exporting, permission management, and data security, operate correctly.
+
+No critical issues were identified during testing.
+
+### Final Result
+
+**The "Review Past Feedback" use case has been successfully validated.**
