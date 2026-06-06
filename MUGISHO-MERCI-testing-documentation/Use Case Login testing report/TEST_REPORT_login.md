@@ -11,212 +11,184 @@
 
 ---
 
-## 1. What I Was Testing
+## What I tested
 
-I was testing the **login (authentication) workflow** for the MKB Survey Application. This covers:
+I tested the login flow of the MKB Survey Web Application through the following scenarios:
 
-- Accessing the login interface
-- Logging in with valid credentials and checking the dashboard redirect
-- Handling incorrect credentials (wrong password / user not found)
-- Account lockout behavior after multiple failed attempts
-- Redirect to role-specific dashboard after successful login
-- Forgotten password page accessibility from the login screen
+- access to the login interface
+- login attempt with an unregistered email
+- repeated login attempts with an incorrect password
+- login with valid credentials and redirect to the dashboard
+- access to the password recovery page
 
----
+### Test case details
 
-## 2. Preconditions (from Use Case)
-
-- The user has access to the login interface.
-- The system is connected to the authentication database.
-- A test account already exists (created via the Create Account use case).
-
----
-
-## 3. Test Cases Executed
-
-### TC-01 · Accessing the Login Interface
+#### TC-01 · Access to the Login Interface
 
 **Steps:**
-
-1. Opened the MKB Survey Application in the browser.
+1. Opened the MKB Survey Application.
 2. Navigated to the login page.
 
-**Expected result:** A login form is displayed with fields for email and password, a "Forgot password?" link, and a "Create Account" option.
+**Expected:** The login form should display email and password fields, a "Forgot password?" link, and a registration option.
 
-**Observed result:** ✅ The login page loaded correctly with all expected fields and links.
+**Observed:** ✅ The login page loaded successfully with the expected fields and links.
 
-**Screenshot:**
+**Evidence:**
 
 ![Login Page](screenshots/login_page.png)
 
 ---
 
-### TC-02 · Login with Incorrect Credentials — "User Not Found" Error
+#### TC-02 · Login with Unregistered Email
 
 **Steps:**
-
-1. On the login page, entered an email address that does not exist in the system.
+1. Entered an email address that does not exist in the system.
 2. Entered any password.
-3. Clicked "Login".
+3. Clicked "Login." 
 
-**Expected result (from UC-Login, Alternative Course 2a):** The system displays an error message indicating the credentials are invalid (e.g. _"Incorrect username or password"_ or _"User not found"_).
+**Expected:** The system should display an error indicating invalid credentials or an unregistered user.
 
-**Observed result:** ✅ The system displayed a **"user not found"** error message, correctly blocking access for unregistered email addresses.
+**Observed:** ✅ The login attempt was blocked and the UI displayed a **"user not found"** error.
 
-**Screenshot:**
+**Evidence:**
 
 ![User Not Found Error](screenshots/user_not_found_error.png)
 
 ---
 
-### TC-03 · No Lockout After Multiple Incorrect Login Attempts
+#### TC-03 · Repeated Failed Login Attempts
 
 **Steps:**
-
-1. On the login page, entered a valid email but an incorrect password.
-2. Repeated the attempt **multiple times** (more than 3 and more than 5 times).
+1. Entered a valid email with an incorrect password.
+2. Repeated this at least five times.
 3. Observed the system behavior after each attempt.
 
-**Expected result (from UC-Login, Alternative Course 2b):**
+**Expected:** According to UC-Login, the system should lock the account or block login after repeated failures.
 
-- After **3 failed attempts**: Account is locked for **1 minute**, with message _"Too many failed attempts. Please try again in X minutes."_
-- After **5 failed attempts**: Account is locked for **3 minutes**.
+**Observed:** ❌ No lockout occurred. The application continued to accept login attempts without delay, CAPTCHA, or any lockout message.
 
-**Observed result:** ❌ **The lockout mechanism was NOT triggered.** The system continued accepting login attempts indefinitely without any lockout, warning, or CAPTCHA challenge.
+**Severity:** High — this is a significant security gap that exposes the system to brute-force attacks.
 
-**Type:** Missing Security Feature  
-**Severity:** **High** — Without a lockout mechanism, the application is vulnerable to **brute-force attacks**. An attacker could try unlimited password combinations with no consequence.
-
-**Screenshot:**
+**Evidence:**
 
 ![No Lockout After Multiple Attempts](screenshots/no_lockout_after_multiple_attempts.png)
 
 ---
 
-### TC-04 · Login with Valid Credentials → Dashboard Redirect
+#### TC-04 · Valid Login and Redirect to Dashboard
 
 **Steps:**
+1. Entered a valid registered email and correct password.
+2. Clicked "Login." 
 
-1. On the login page, entered a valid registered email and correct password.
-2. Clicked "Login".
+**Expected:** The system should authenticate the user and redirect them to the appropriate dashboard.
 
-**Expected result (from UC-Login, Step 6):** The system verifies the credentials and redirects the user to their **role-specific dashboard** (Student dashboard in this test).
+**Observed:** ✅ The user authenticated successfully and was redirected to the dashboard.
 
-**Observed result:** ✅ The system successfully authenticated the user and redirected to the home / dashboard page after login.
-
-**Screenshot:**
+**Evidence:**
 
 ![Dashboard After Login](screenshots/dashboard_after_login.png)
 
 ---
 
-### TC-05 · "Forgot Password?" / "Lost Password" Link Accessible 
+#### TC-05 · Access to Password Recovery Page
 
 **Steps:**
+1. Clicked the "Forgot password?" link from the login page.
 
-1. On the login page, clicked the "Lost your password?" / "Forgot password?" link.
+**Expected:** The application should open the password recovery interface.
 
-**Expected result (from UC-Login, Section: Forgotten Password Recovery):** The system redirects to the password recovery interface where the user enters their registered email to receive a reset link.
+**Observed:** ✅ The password recovery page loaded correctly and displayed the email entry form.
 
-**Observed result:** ✅ The **Lost Password page** loaded correctly and displayed the email input form for password recovery.
-
-**Screenshot:**
+**Evidence:**
 
 ![Lost Password Page](screenshots/lost_password_page.png)
 
 ---
 
-## 4. Summary Table
+## What I observed
 
-| TC ID | Test Case Description                                  | Status  | Severity |
-| ----- | ------------------------------------------------------ | ------- | -------- |
-| TC-01 | Accessing the login interface                          | ✅ Pass | —        |
-| TC-02 | Login with unregistered email — "user not found" error | ✅ Pass | —        |
-| TC-03 | **No lockout after multiple failed login attempts**    | ❌ Fail | **High** |
-| TC-04 | Login with valid credentials → dashboard redirect      | ✅ Pass | —        |
-| TC-05 | "Lost Password" page accessible from login             | ✅ Pass | —        |
+| TC ID | Test case | Result | Severity |
+| ----- | --------- | ------ | -------- |
+| TC-01 | Access to the login interface | Pass | — |
+| TC-02 | Unregistered email | Pass | — |
+| TC-03 | Repeated failed login attempts | Fail | High |
+| TC-04 | Valid login and redirect | Pass | — |
+| TC-05 | Access to password recovery | Pass | — |
 
-## 5. What I Saw
+### Main observations
 
-- I verified that the login interface loads correctly and presents the expected fields.
-- The application correctly rejects unregistered accounts and successful credentials redirect to the dashboard.
+- The login interface is accessible and clearly presented.
+- The system correctly rejects unregistered users.
 - The password recovery entry point is available and functional.
-- The security behavior for multiple failed login attempts is missing, which is a major gap.
+- The valid login flow works and redirects to the dashboard.
+- The lockout mechanism after repeated failed login attempts is not implemented.
 
-## 6. What the UC Says
+## What UC says in the document
 
-- UC-Login requires a working authentication flow with valid and invalid credential handling.
-- It specifies role-based dashboard redirection and an account lockout policy after repeated failed attempts.
-- It also requires the forgotten password recovery path to be accessible.
+The `UC-Login` document specifies that the system should:
 
-## 7. What Was Not Respected Compared to the UC
+- allow access to the login interface
+- handle valid and invalid credentials
+- block or delay access after repeated failed attempts
+- redirect each user role to the appropriate dashboard
+- provide access to password recovery
 
-- The lockout policy after repeated failed login attempts was not implemented.
-- No CAPTCHA or progressive delay mechanism appeared after multiple failures.
-- Role-based dashboard redirect verification was not fully tested in this report and should be confirmed.
+## What is respected against the UC
 
-## 8. Professional Improvement Proposals
+- ✅ The login interface is accessible.
+- ✅ Invalid credentials are rejected.
+- ✅ The password recovery page is available.
+- ✅ Successful login redirects to the dashboard.
 
-- Implement an account lockout policy after 3–5 failed attempts and show explicit messaging.
-- Add a CAPTCHA or progressively increasing wait time on repeated failures to reduce brute-force risk.
-- Confirm and document that each role (Student, Instructor, Admin) lands on the correct dashboard.
-- Add session timeout and login audit logging for security and traceability.
-- Improve the login UI by showing clear validation messages near each form field.
+## What is not respected against the UC
 
----
+- ❌ The lockout or delay after repeated failed login attempts is not implemented.
+- ❌ No progressive protection (delay, CAPTCHA, or lockout) is applied.
+- ❌ Role-specific dashboard redirect verification was not covered in this test.
 
-## 9. Bug Report
+## What I propose as solutions
 
-### BUG-01 · No Account Lockout After Multiple Failed Login Attempts
-
-| Field             | Details                                                                 |
-| ----------------- | ----------------------------------------------------------------------- |
-| **ID**            | BUG-LOGIN-01                                                            |
-| **Title**         | Account not locked after multiple failed login attempts                 |
-| **Type**          | Missing Security Feature                                                |
-| **Severity**      | High                                                                    |
-| **Use Case Ref.** | UC-Login — Alternative Course 2b                                        |
-| **Expected**      | After 3 failed attempts: 1-min lockout. After 5: 3-min lockout.         |
-| **Observed**      | No lockout at all — unlimited attempts accepted without any restriction |
-| **Impact**        | The application is vulnerable to brute-force attacks on user accounts   |
-| **Screenshot**    | `screenshots/no_lockout_after_multiple_attempts.png`                    |
+- Implement an account lockout mechanism after 3 to 5 failed login attempts.
+- Display a clear message when the account is temporarily locked.
+- Add progressive delay or CAPTCHA after repeated failures to reduce brute-force risk.
+- Verify role-based dashboard redirect behavior for Student, Instructor, and Admin.
+- Add tests for session timeout and login audit logging.
 
 ---
 
-## 6. Special Notes
+## Defect report
 
-> ❌ **Critical security gap:** The lockout mechanism (Alternative Course 2b in UC-Login) is a fundamental security requirement, not an optional enhancement. Its absence represents a direct violation of the documented specification and exposes all user accounts to automated password attacks.
+### BUG-LOGIN-01 · Missing account lockout after repeated failed login attempts
 
-> ✅ **Credential validation works correctly:** The system properly identifies unregistered email addresses and blocks login (TC-02).
-
-> ✅ **Successful login flow works end-to-end:** Valid credentials authenticate the user and redirect them to the dashboard (TC-04).
-
-> ✅ **Password recovery entry point works:** The "Lost Password" page is accessible from the login interface (TC-05).
-
-> ⚠️ **Not yet tested in this session:**
->
-> - Role-based redirect verification (Student vs. Instructor vs. Admin dashboards)
-> - Session timeout enforcement
-> - CAPTCHA after repeated failures (supplemental requirement in UC-Login)
-> - Clicking the full password reset link from the recovery email
-
----
-
-## 7. Action Items
-
-- [x] Documented all test observations with screenshots
-- [ ] Create a sub-issue for **BUG-LOGIN-01** (missing lockout after failed attempts)
-- [ ] Add the **`bug`** label to the sub-issue
-- [ ] Test role-based dashboard redirect (Student / Instructor / Admin)
-- [ ] Test session timeout enforcement
-- [ ] Continue testing the full password recovery flow
+| Field | Details |
+| ----- | ------- |
+| **ID** | BUG-LOGIN-01 |
+| **Title** | Account lockout behavior not implemented after repeated failed login attempts |
+| **Type** | Security / Functional |
+| **Severity** | High |
+| **Use Case Reference** | UC-Login, Alternative Course 2b |
+| **Expected** | Lock account after 3 failed attempts and apply progressive delay or block |
+| **Observed** | No lockout applied, unlimited login attempts accepted |
+| **Impact** | Brute-force attack risk and non-compliance with UC-Login |
+| **Evidence** | `screenshots/no_lockout_after_multiple_attempts.png` |
 
 ---
 
-## 8. Related Documents
+## Actions recommended
 
-- [UC-Login](../../doc/usecase-diagram/usecases/UC-Login/UC-Login.md)
-- [UC-Create_Account](../../doc/usecase-diagram/usecases/UC-Login/sub_UC-Login/UC-Create_Account.md)
-- [UC-Password_Recovery](../../doc/usecase-diagram/usecases/UC-Login/sub_UC-Login/UC-Password_Recovery.md)
-- [Test Report: Create Account](../test_create_account/TEST_REPORT_create_account.md)
-- [Test Report: Student Survey](../test_student_survey/TEST_REPORT_student_survey.md)
+- [x] Document observations and screenshot evidence.
+- [ ] Create an issue for the missing lockout behavior.
+- [ ] Confirm role-based dashboard redirect for all user roles.
+- [ ] Test the complete password reset link flow.
+- [ ] Add tests for session timeout and login audit.
+
+---
+
+## Related documents
+
+- `doc/usecase-diagram/usecases/UC-Login/UC-Login.md`
+- `doc/usecase-diagram/usecases/UC-Login/sub_UC-Login/UC-Create_Account.md`
+- `doc/usecase-diagram/usecases/UC-Login/sub_UC-Login/UC-Password_Recovery.md`
+- `MUGISHO-MERCI-testing-documentation/Use Case Create Account testing create_Account/TEST_REPORT_create_account.md`
+- `MUGISHO-MERCI-testing-documentation/test_provide_feedback/TEST_REPORT_student_survey.md`

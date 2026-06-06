@@ -6,258 +6,242 @@
 
 ---
 
-## Executive Summary
+## What I tested
 
-This test report documents the comprehensive testing of the "Review Past Feedback" use case functionality. The primary objective was to verify that users can successfully view, access, and review their completed survey responses.
+I tested the Review Past Feedback functionality for completed survey responses across all relevant sections. The focus was on verifying:
 
-**Overall Result:** The core functionality works correctly, but a **critical display bug** has been identified affecting the visibility of user responses for specific survey sections (Frontend Questions and Backend Questions).
+- access to the completed surveys page
+- display of answers for each review section
+- review of "Your Self" responses
+- review of "Fullstack Questions" responses
+- review of "Development" responses
+- review of "Read About" responses
+- review of "Read Home" responses
+- review of "Frontend Questions" responses
+- review of "Backend Questions" responses
 
----
+### Test case details
 
-## 1. Test Scope & Objectives
+#### TC-01 · Access Completed Surveys Page
 
-### 1.1 Scope
-This test covers the following functionality:
-- Navigation to completed surveys
-- Display of survey responses organized by sections
-- Visibility and rendering of user answers across different survey categories
-- Layout and presentation of feedback data
+**Steps:**
+1. Navigated to the "My Completed Surveys" page.
+2. Confirmed the list of completed surveys displayed.
+3. Verified section grouping and page layout.
 
-### 1.2 Test Objectives
-- ✅ Verify users can access "My Completed Surveys" page
-- ✅ Confirm survey responses are retrieved correctly from the system
-- ✅ Validate that user answers display properly for all survey sections
-- ❌ Identify and document any display or rendering issues
+**Expected:** The completed surveys page loads successfully and survey sections are clearly organized.
 
----
+**Observed:** ✅ The page loaded correctly and the survey list displayed as expected.
 
-## 2. Test Environment
-
-| Configuration | Details |
-|:---|:---|
-| **OS** | Linux |
-| **Browser** | Chrome/Firefox |
-| **Application URL** | MKB Web Site - Feedback Survey Section |
-| **Test Type** | Manual Functional Testing |
-| **Test Approach** | User Interface Verification & Visual Inspection |
+**Evidence:** `Screenshot_my_Surveys You Have Completed_page.png`
 
 ---
 
-## 3. Test Cases Executed
+#### TC-02 · View "Your Self" Section Answers
 
-### 3.1 Test Case 1: Access Completed Surveys Page
-**Status:** ✅ **PASS**
+**Steps:**
+1. Opened the "Your Self" section.
+2. Confirmed submitted answers were visible.
+3. Checked answer layout and formatting.
 
-| Step | Expected Result | Actual Result |
-|:---|:---|:---|
-| 1. Navigate to "My Completed Surveys" | Page loads successfully | Page loads successfully ✅ |
-| 2. Verify survey list displays | List of completed surveys visible | Survey list displayed ✅ |
-| 3. Verify page layout | Surveys organized by sections/categories | Properly organized ✅ |
+**Expected:** User responses display correctly and are properly formatted.
 
-**Evidence:** Screenshot: `Screenshot_my_Surveys You Have Completed_page.png`
-
----
-
-### 3.2 Test Case 2: View "Your Self" Section Answers
-**Status:** ✅ **PASS**
-
-| Step | Expected Result | Actual Result |
-|:---|:---|:---|
-| 1. Access "Your Self" section | Section loads | Section loads ✅ |
-| 2. Verify answers display | User responses visible | Answers visible and correctly formatted ✅ |
-| 3. Verify layout | Answers properly structured | Layout correct ✅ |
-
-**Evidence:** 
-- Screenshot: `Screenshot my  Answers beedbank for: Your self page.png`
-- Screenshot: `Screenshot my  Answers beedbank for: Your self section.png`
-
----
-
-### 3.3 Test Case 3: View "Fullstack Questions" Section Answers
-**Status:** ✅ **PASS**
-
-| Step | Expected Result | Actual Result |
-|:---|:---|:---|
-| 1. Access "Fullstack Questions" section | Section loads | Section loads ✅ |
-| 2. Verify answers display | User responses visible | Answers visible and properly displayed ✅ |
-| 3. Check formatting consistency | Answers match other sections' format | Layout consistent ✅ |
-
-**Evidence:** Screenshot: `Screenshot  my Answers for: Fullstack Questions feedbank.png`
-
----
-
-### 3.4 Test Case 4: View "Development Section" Answers
-**Status:** ✅ **PASS**
-
-| Step | Expected Result | Actual Result |
-|:---|:---|:---|
-| 1. Access "Your Development" section | Section loads | Section loads ✅ |
-| 2. Verify answers display | User responses visible | Answers visible ✅ |
-| 3. Verify visual hierarchy | Content properly formatted | Format correct ✅ |
-
-**Evidence:** Screenshot: `Screenshot my Answers for: your developpement section.png`
-
----
-
-### 3.5 Test Case 5: View "Read About Section" Answers
-**Status:** ✅ **PASS**
-
-| Step | Expected Result | Actual Result |
-|:---|:---|:---|
-| 1. Access "Read About" section | Section loads | Section loads ✅ |
-| 2. Verify answers display | User responses visible | Answers visible ✅ |
-
-**Evidence:** Screenshot: `Screenshot Your Answers for: Read about section on the MKB Web site.png`
-
----
-
-### 3.6 Test Case 6: View "Read Home Section" Answers
-**Status:** ✅ **PASS**
-
-| Step | Expected Result | Actual Result |
-|:---|:---|:---|
-| 1. Access "Read Home" section | Section loads | Section loads ✅ |
-| 2. Verify answers display | User responses visible | Answers visible ✅ |
-
-**Evidence:** Screenshot: `Screenshot Your Answers for: Read the home section at MKB Web site..png`
-
----
-
-### 3.7 Test Case 7: View "Frontend Questions" Answers
-**Status:** ❌ **FAIL** - Critical Display Bug
-
-| Step | Expected Result | Actual Result |
-|:---|:---|:---|
-| 1. Access "Frontend Questions" section | Section loads | Section loads but answers NOT visible ❌ |
-| 2. Verify answers display | User responses should be visible | **Answer data is missing from display** ❌ |
-| 3. Verify all question responses shown | All questions answered should appear | **No responses displayed** ❌ |
-
-**Evidence:** 
-- Screenshot: `Screenshot it's the bug for my Answers beedbank for: Frontend Questions.png`
-- Screenshot: `Screenshot bug frontend questions 1.png`
-
-**Impact:** Users cannot review their Frontend Questions answers through the UI, even though the answers were successfully submitted.
-
----
-
-### 3.8 Test Case 8: View "Backend Questions" Answers
-**Status:** ❌ **FAIL** - Critical Display Bug
-
-| Step | Expected Result | Actual Result |
-|:---|:---|:---|
-| 1. Access "Backend Questions" section | Section loads | Section loads but answers NOT visible ❌ |
-| 2. Verify answers display | User responses should be visible | **Answer data is missing from display** ❌ |
-| 3. Verify all question responses shown | All questions answered should appear | **No responses displayed** ❌ |
+**Observed:** ✅ Answers displayed correctly and formatting was consistent.
 
 **Evidence:**
-- Screenshot: `Screenshot it's bug for my Answers  feedbank for: Backend Questions.png`
-- Screenshot: `Screenshot bug Backend questions 1.png`
-
-**Impact:** Users cannot review their Backend Questions answers through the UI, despite successful form submission.
+- `Screenshot my  Answers beedbank for: Your self page.png`
+- `Screenshot my  Answers beedbank for: Your self section.png`
 
 ---
 
-## 4. Issues & Defects Identified
+#### TC-03 · View "Fullstack Questions" Section Answers
 
-### 4.1 Critical Issue: Missing Answers Display for Frontend & Backend Questions
+**Steps:**
+1. Opened the "Fullstack Questions" section.
+2. Confirmed submitted answers were visible.
+3. Checked formatting consistency with other sections.
 
-**Issue ID:** BUG-001  
-**Severity:** 🔴 **CRITICAL**  
-**Status:** 🔴 **OPEN**  
-**Priority:** P0 (Highest)
+**Expected:** Fullstack answers are visible and consistently formatted.
 
-#### Description
-User responses for "Frontend Questions" and "Backend Questions" survey sections are not visible on the "My Completed Surveys" page, while answers for other sections (Your Self, Fullstack Questions, Development, etc.) display correctly.
+**Observed:** ✅ Answers displayed and matched the layout used in other sections.
 
-#### Expected Behavior
-When accessing the "My Completed Surveys" page, all submitted survey responses should be displayed consistently across all survey sections, including:
-- Frontend Questions
-- Backend Questions
-
-#### Actual Behavior
-- The Frontend Questions section appears but shows no answer data
-- The Backend Questions section appears but shows no answer data
-- Other sections display answers correctly
-- This inconsistency suggests a data retrieval or rendering issue specific to these two sections
-
-#### Steps to Reproduce
-1. Complete a survey that includes "Frontend Questions" and "Backend Questions"
-2. Navigate to "My Completed Surveys" page
-3. Observe that answers are visible for "Your Self", "Fullstack Questions", "Development Section", etc.
-4. Scroll to or access "Frontend Questions" section → **Answers not displayed**
-5. Scroll to or access "Backend Questions" section → **Answers not displayed**
-
-#### Evidence
-- Screenshot: `Screenshot it's the bug for my Answers  feedbank for: Backend Questions.png`
-- Screenshot: `Screenshot it's the bug for my Answers beedbank for: Frontend Questions.png`
-- Screenshot: `Screenshot bug Backend questions 1.png`
-- Screenshot: `Screenshot bug frontend questions 1.png`
-
-#### Root Cause Analysis
-
-**Possible Causes:**
-1. **Backend Issue:** Survey questions endpoint not returning data for Frontend/Backend question types
-2. **Filtering Logic:** Data filter or query parameter incorrectly excluding these question categories
-3. **Frontend Rendering:** Component-specific rendering bug for these question types
-4. **Data Mapping:** Incorrect data binding or variable mapping for these sections
-
-#### Affected Users
-- All users (Students and Instructors) who attempt to review their answers for Frontend or Backend Questions
+**Evidence:** `Screenshot  my Answers for: Fullstack Questions feedbank.png`
 
 ---
 
-## 5. Summary of Test Results
+#### TC-04 · View "Development" Section Answers
 
-| Test Case | Result | Notes |
-|:---|:---|:---|
-| 3.1 - Access Completed Surveys | ✅ PASS | Page loads correctly |
-| 3.2 - Your Self Section | ✅ PASS | Answers display correctly |
-| 3.3 - Fullstack Questions | ✅ PASS | Answers display correctly |
-| 3.4 - Development Section | ✅ PASS | Answers display correctly |
-| 3.5 - Read About Section | ✅ PASS | Answers display correctly |
-| 3.6 - Read Home Section | ✅ PASS | Answers display correctly |
-| 3.7 - Frontend Questions | ❌ FAIL | Critical display bug detected |
-| 3.8 - Backend Questions | ❌ FAIL | Critical display bug detected |
+**Steps:**
+1. Opened the "Your Development" section.
+2. Confirmed submitted answers were visible.
+3. Verified proper visual hierarchy.
 
-**Overall Test Result:** ⚠️ **75% PASS RATE (6/8 cases passed)**
+**Expected:** Development answers display correctly and maintain their structure.
 
-## 5. What I Saw
+**Observed:** ✅ The section loaded and answers displayed correctly.
 
-- I saw that most survey sections display answers correctly and the completed survey list is accessible.
-- The "Frontend Questions" and "Backend Questions" sections load but do not display the submitted answers.
-- Other review sections such as Your Self, Fullstack Questions, Development, Read About, and Read Home render data as expected.
-- This indicates a targeted display issue rather than a complete breakdown of the review feedback system.
+**Evidence:** `Screenshot my Answers for: your developpement section.png`
 
-## 6. What UC Says
+---
 
-- UC-ReviewPastFeedback requires users to view historical feedback for completed surveys.
-- It specifies that instructors should be able to see the responses for surveys they created and that students should see their own submissions.
-- It also requires filtering, detailed response views, and export options for review data.
-- Role-based access and secure visibility controls are part of the expected behavior.
+#### TC-05 · View "Read About" Section Answers
 
-## 7. What Was Not Respected Compared to the UC
+**Steps:**
+1. Opened the "Read About" section.
+2. Confirmed submitted answers were visible.
 
-- Responses for Frontend Questions and Backend Questions are not displayed, violating the feedback review requirement.
-- There is no visible evidence of filtering or export functionality in the current UI.
-- The report does not show audit or access logging, which is part of the documented use case.
+**Expected:** Read About answers display correctly.
 
-## 8. Professional Improvement Proposals
+**Observed:** ✅ Answers displayed correctly.
 
-- Fix the data retrieval or rendering bug for Frontend and Backend question sections.
-- Add filtering controls by survey title, date range, and student name for instructors.
-- Introduce export options such as CSV and PDF for completed feedback reports.
-- Implement clearer empty-state messaging for sections that have no data.
-- Add audit logging for feedback view actions to strengthen traceability and security.
+**Evidence:** `Screenshot Your Answers for: Read about section on the MKB Web site.png`
 
-## 9. Recommendations & Next Steps
+---
 
-### 9.1 Immediate Actions Required
-1. **Investigate Backend API:** Verify that the `/api/surveys/responses` endpoint correctly returns data for Frontend and Backend question types.
-2. **Debug Frontend Component:** Check the rendering logic for these specific question categories.
-3. **Review Data Schema:** Confirm that Frontend/Backend questions are correctly mapped in the survey response data model.
+#### TC-06 · View "Read Home" Section Answers
 
-### 9.2 Quality Assurance Verification
-1. Once the issue is fixed, re-test all 8 test cases.
+**Steps:**
+1. Opened the "Read Home" section.
+2. Confirmed submitted answers were visible.
+
+**Expected:** Read Home answers display correctly.
+
+**Observed:** ✅ Answers displayed correctly.
+
+**Evidence:** `Screenshot Your Answers for: Read the home section at MKB Web site..png`
+
+---
+
+#### TC-07 · View "Frontend Questions" Section Answers
+
+**Steps:**
+1. Opened the "Frontend Questions" section.
+2. Confirmed submitted answers were visible.
+3. Verified all question responses appeared.
+
+**Expected:** Frontend Questions answers should appear in the review page.
+
+**Observed:** ❌ The section loaded, but answers were not visible.
+
+**Evidence:**
+- `Screenshot it's the bug for my Answers beedbank for: Frontend Questions.png`
+- `Screenshot bug frontend questions 1.png`
+
+**Impact:** Users cannot review their Frontend Questions answers even though they were submitted successfully.
+
+---
+
+#### TC-08 · View "Backend Questions" Section Answers
+
+**Steps:**
+1. Opened the "Backend Questions" section.
+2. Confirmed submitted answers were visible.
+3. Verified all question responses appeared.
+
+**Expected:** Backend Questions answers should appear in the review page.
+
+**Observed:** ❌ The section loaded, but answers were not visible.
+
+**Evidence:**
+- `Screenshot it's bug for my Answers  feedbank for: Backend Questions.png`
+- `Screenshot bug Backend questions 1.png`
+
+**Impact:** Users cannot review their Backend Questions answers even though they were submitted successfully.
+
+---
+
+## What I observed
+
+| Test case | Result | Severity |
+| --- | --- | --- |
+| Access Completed Surveys | Pass | — |
+| Your Self section | Pass | — |
+| Fullstack Questions section | Pass | — |
+| Development section | Pass | — |
+| Read About section | Pass | — |
+| Read Home section | Pass | — |
+| Frontend Questions section | Fail | High |
+| Backend Questions section | Fail | High |
+
+### Main observations
+
+- The completed surveys page is accessible and survey sections are displayed clearly.
+- Answers for Your Self, Fullstack Questions, Development, Read About, and Read Home are visible and correctly formatted.
+- The Frontend Questions and Backend Questions sections load, but submitted answers are not displayed.
+- This appears to be a section-specific display issue rather than a general data retrieval failure.
+
+## What UC says in the document
+
+The UC-ReviewPastFeedback document states that the system must:
+
+- allow users to view historical feedback for completed surveys
+- display all submitted survey responses by section
+- provide clear navigation through completed survey review pages
+- support review for both student and instructor roles
+- maintain secure access and consistent presentation of response data
+
+## What is respected against the UC
+
+- ✅ The completed surveys page is accessible.
+- ✅ The user can navigate to all review sections.
+- ✅ Answers are displayed correctly for several sections.
+- ✅ Page layout and section organization are consistent for supported sections.
+
+## What is not respected against the UC
+
+- ❌ Answers for Frontend Questions are not displayed.
+- ❌ Answers for Backend Questions are not displayed.
+- ❌ There is no evidence of filtering or export functionality in the current review page.
+- ❌ The use case expectation for complete review visibility is not met.
+
+## What I propose as solutions
+
+- Fix the display bug for Frontend Questions and Backend Questions sections.
+- Verify the data retrieval logic for these question categories.
+- Add clear empty-state messaging when no review data is available.
+- Improve survey review controls with filtering by survey title, date, and student name.
+- Add export options such as CSV or PDF for completed survey review results.
+- Include audit logging for feedback review actions to improve traceability.
+
+---
+
+## Defect report
+
+### BUG-REVIEW-01 · Missing answer display for Frontend and Backend question sections
+
+| Field | Details |
+| --- | --- |
+| **ID** | BUG-REVIEW-01 |
+| **Title** | Submitted answers not displayed for Frontend and Backend question sections |
+| **Type** | Functional / Display |
+| **Severity** | High |
+| **Use Case Reference** | UC-ReviewPastFeedback |
+| **Expected** | All submitted answers should display in every review section |
+| **Observed** | Frontend and Backend question responses are not visible |
+| **Impact** | Users cannot fully review their completed survey responses |
+| **Evidence** | `Screenshot it's the bug for my Answers beedbank for: Frontend Questions.png`, `Screenshot it's bug for my Answers  feedbank for: Backend Questions.png` |
+
+---
+
+## Recommendations & next steps
+
+### Immediate actions
+1. Investigate backend response handling for Frontend and Backend question sections.
+2. Check frontend rendering logic for these sections.
+3. Confirm data mapping and section labels for all review categories.
+
+### Follow-up verification
+1. Re-test all sections after the fix.
+2. Validate that Frontend and Backend question answers display correctly.
+3. Confirm the overall review flow is complete and consistent.
+
+---
+
+## Related documents
+
+- `doc/usecase-diagram/usecases/UC-ReviewPastFeedback/UC-ReviewPastFeedback.md`
+- `MUGISHO-MERCI-testing-documentation/Use Case Create Account testing create_Account/TEST_REPORT_create_account.md`
+- `MUGISHO-MERCI-testing-documentation/test_provide_feedback/TEST_REPORT_student_survey.md`
 2. Verify data consistency across all browsers.
 3. Perform cross-browser compatibility testing (Chrome, Firefox, Safari, Edge).
 4. Test with multiple user accounts to ensure the issue is not user-specific.

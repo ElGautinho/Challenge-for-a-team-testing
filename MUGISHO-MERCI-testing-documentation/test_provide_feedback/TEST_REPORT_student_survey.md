@@ -10,188 +10,149 @@
 
 ---
 
-## 1. What I Was Testing
+## What I tested
 
-I was testing the **student feedback / survey submission workflow** for the MKB Survey Application. This covers:
+I tested the student feedback survey workflow in the MKB Survey Web Application by verifying the following scenarios:
 
-- Logging in as a student and accessing the home/dashboard page
-- Viewing the list of all available surveys
-- Opening, completing, and submitting a survey (referred to as "sodage" in the application)
-- Verifying the post-submission confirmation state
+- login as a student and access the dashboard
+- navigate to the available surveys list
+- open and complete a survey
+- submit the survey and verify the confirmation screen
+- observe the terminology used in the UI
 
----
+### Test case details
 
-## 2. Preconditions (from Use Case)
-
-- The student has a verified and approved account.
-- The student is logged into the system.
-- At least one survey has been assigned and is available on the student's dashboard.
-
----
-
-## 3. Test Cases Executed
-
-### TC-01 · Student Home Page After Login
+#### TC-01 · Student Home Page After Login
 
 **Steps:**
-
 1. Logged in as a student with valid credentials.
-2. Observed the landing/home page displayed after authentication.
+2. Observed the landing/home page after authentication.
 
-**Expected result (from UC-ProvideFeedback, Step 2):** The system authenticates the student and displays their dashboard / home page, which should include access to available surveys.
+**Expected:** The student dashboard loads successfully and displays survey navigation options.
 
-**Observed result:** ✅ The student home page loaded correctly after login. The MKB application home section was displayed with the expected layout and navigation.
+**Observed:** ✅ The student home page loaded correctly and showed the expected home section layout.
 
-**Screenshot:**
-
-![Student Home Page](screenshots/student_home_page.png)
+**Evidence:**
+- `screenshots/student_home_page.png`
 
 ---
 
-### TC-02 · Accessing the All Surveys Page
+#### TC-02 · Accessing the All Surveys Page
 
 **Steps:**
+1. From the student home page, navigated to the "All Surveys" page.
+2. Confirmed the list of available surveys.
 
-1. From the student home page (TC-01), navigated to the "All Surveys" section or link.
-2. Clicked the relevant navigation element to access the surveys list.
+**Expected:** The system displays all surveys available to the student with clear access options.
 
-**Expected result (from UC-ProvideFeedback, Steps 3–4):** The system displays a list of all surveys available to the student, with their titles and access options.
+**Observed:** ✅ The All Surveys page loaded successfully and the available surveys were visible.
 
-**Observed result:** ✅ Clicking the "All Surveys" navigation element successfully loaded the surveys list page. The available surveys were displayed and accessible.
-
-**Screenshot:**
-
-![All Surveys Page](screenshots/all_surveys_page.png)
+**Evidence:**
+- `screenshots/all_surveys_page.png`
 
 ---
 
-### TC-03 · Completing a Survey (Sodage)
+#### TC-03 · Completing a Survey
 
 **Steps:**
+1. Selected a survey from the All Surveys page.
+2. Read instructions and answered all questions.
+3. Navigated through the survey and reviewed responses.
 
-1. From the All Surveys page (TC-02), selected a survey to complete.
-2. Read the instructions and answered all questions in the survey.
-3. Navigated through the survey using the available controls.
-4. Reviewed the answers before finalizing.
+**Expected:** The survey loads correctly, records answers, and allows review before submission.
 
-**Expected result (from UC-ProvideFeedback, Steps 5–7):** The system displays the survey with all questions, records responses as they are entered, allows navigation between questions, and enables the student to review their answers before submission.
+**Observed:** ✅ The survey loaded correctly, questions were accessible, and the student reached the end state after completing all fields.
 
-**Observed result:** ✅ The survey (sodage) was displayed correctly. Questions were accessible and navigable. The completed state of the survey was reached after answering all fields.
-
-**Screenshot:**
-
-![Survey Completed — Ready to Submit](screenshots/survey_completed.png)
+**Evidence:**
+- `screenshots/survey_completed.png`
 
 ---
 
-### TC-04 · Submitting the Survey and Confirmation
+#### TC-04 · Submitting the Survey and Confirmation
 
 **Steps:**
+1. After completing all questions, clicked the final submit button.
+2. Observed the post-submission response.
 
-1. After completing all questions in TC-03, clicked the final "Submit" button.
-2. Observed the system response after submission.
+**Expected:** The system validates required fields, stores feedback, and displays a confirmation message.
 
-**Expected result (from UC-ProvideFeedback, Steps 7–8 and the "Submitting Feedback" section):**
+**Observed:** ✅ The survey submitted successfully and a confirmation screen was displayed.
 
-- The system validates that all required fields are filled.
-- Confirms the submission.
-- Securely stores the feedback.
-- Displays a **thank-you / confirmation message** on the student's dashboard.
-- The survey is marked as **completed**.
-
-**Observed result:** ✅ The survey was submitted successfully. A post-submission screen was displayed confirming the action (labelled here as "After submission sodage"). The system acknowledged the submission and updated the view accordingly.
-
-**Screenshot:**
-
-![After Survey Submission](screenshots/after_survey_submission.png)
+**Evidence:**
+- `screenshots/after_survey_submission.png`
 
 ---
 
-## 4. Summary Table
+## What I observed
 
-| TC ID | Test Case Description                                   | Status  | Severity |
-| ----- | ------------------------------------------------------- | ------- | -------- |
-| TC-01 | Student home page displyed correctly after login        | ✅ Pass | —        |
-| TC-02 | All Surveys page accessible and lists available surveys | ✅ Pass | —        |
-| TC-03 | Survey opened, questions answered, review possible      | ✅ Pass | —        |
-| TC-04 | Survey submitted — confirmation screen displayed        | ✅ Pass | —        |
+- The student dashboard loads correctly and displays available survey navigation.
+- The All Surveys page is accessible and presents the list of surveys.
+- The survey content is displayed correctly and allows the student to complete answers.
+- The survey submission process works and shows a confirmation state.
+- The application uses the term "sodage" instead of "survey," creating a terminology inconsistency.
 
-## 5. What I Saw
+## What UC says in the document
 
-- I confirmed that the student dashboard loads correctly and exposes available surveys.
-- The survey list is accessible and the survey content displays as expected.
-- The student can complete the survey and receive a submission confirmation.
-- The UI terminology uses "sodage" instead of "survey," which is inconsistent with the documentation.
+The UC-ProvideFeedback document indicates that the system should:
 
-## 6. What the UC Says
+- allow a student to log in and access assigned surveys
+- display available surveys clearly
+- present the survey questions and collect answers
+- validate required fields and allow review before submission
+- store feedback and show confirmation after submission
 
-- UC-ProvideFeedback requires students to authenticate, access assigned surveys, answer all questions, and submit feedback securely.
-- It expects automatic save of partial progress, required-field validation, and confirmation after submission.
+## What is respected against the UC
 
-## 7. What Was Not Respected Compared to the UC
+- ✅ The student dashboard is accessible after login.
+- ✅ The All Surveys page is available and surveys are listed.
+- ✅ The survey loads and allows answer entry.
+- ✅ The survey submission workflow completes successfully.
 
-- I did not verify partial progress saving for an abandoned survey.
-- I did not verify that required questions block submission if left unanswered.
-- The application uses the term "sodage," creating a terminology mismatch with the documented use case.
+## What is not respected against the UC
 
-## 8. Professional Improvement Proposals
+- ❌ Partial progress saving was not verified in this session.
+- ❌ Required-field validation was not tested.
+- ❌ The UI uses the term "sodage," which does not match the documented use case terminology.
 
-- Align UI wording with documentation by replacing "sodage" with "survey" or updating the documentation to match.
-- Add an explicit progress-saving indicator when students leave a survey incomplete.
-- Add a clear required-field validation summary before submission.
-- Provide a confirmation page or toast message that explicitly states the survey was saved and submitted.
-- Implement role-specific guidance on the student dashboard to show which surveys are currently available and which are completed.
+## What I propose as solutions
 
----
-
-## 9. Special Notes
-
-> ✅ **The core Provide Feedback flow works end-to-end:** A logged-in student can navigate from the home page → All Surveys → open a survey → complete it → submit it → and receive a confirmation. This matches the Typical Course of Events described in UC-ProvideFeedback.
-
-> ⚠️ **Not yet tested in this session:**
->
-> - **Partial progress saving (Alternative Course 5a):** Exiting mid-survey and resuming later
-> - **Required field validation (Alternative Course 7a):** Submitting with unanswered required questions
-> - **No surveys available state (Alternative Course 1a):** Dashboard behaviour when no survey is assigned
-> - **Data privacy:** Verifying that submitted responses are not visible to other students or unauthorized users
-> - **Resubmission prevention:** Whether a student can submit the same survey multiple times
-
-> ⚠️ **Terminology note:** The application uses the term **"sodage"** to refer to a survey. This term does not appear in the UC-ProvideFeedback documentation. This should be noted as a **terminology inconsistency** between the documentation and the implementation — it may cause confusion for new users and testers.
+- Align the UI terminology with the documentation by using "survey" consistently.
+- Add a visible progress-saving indicator for incomplete surveys.
+- Implement and verify required-field validation before submission.
+- Provide explicit confirmation messaging after submission.
+- Add dashboard guidance for available versus completed surveys.
 
 ---
 
-## 6. Points to Follow Up
+## Defect report
 
-### ⚠️ POINT-SURVEY-01 · Terminology Mismatch: "Sodage" vs "Survey"
+### POINT-01 · Terminology inconsistency: "sodage" vs "survey"
 
-| Field              | Details                                                         |
-| ------------------ | --------------------------------------------------------------- |
-| **ID**             | POINT-SURVEY-01                                                 |
-| **Title**          | Application uses "sodage" — documentation uses "survey"         |
-| **Type**           | Terminology Inconsistency / UX Concern                          |
-| **Severity**       | Low                                                             |
-| **Use Case Ref.**  | UC-ProvideFeedback (all references to "survey")                 |
-| **Observed**       | Screenshots show "sodage" in the UI (not "survey")              |
-| **Impact**         | Minor confusion for users and testers unfamiliar with the term  |
-| **Recommendation** | Align UI terminology with the documentation, or update the docs |
-
----
-
-## 7. Action Items
-
-- [x] Documented all test observations with screenshots
-- [ ] Test partial progress saving (exit mid-survey and resume)
-- [ ] Test required field validation before submission
-- [ ] Test the "no surveys available" edge case
-- [ ] Verify data privacy — check that responses are not exposed
-- [ ] Clarify the "sodage" vs "survey" terminology with the team
-- [ ] Add the **`question`** or **`docs`** label for POINT-SURVEY-01 if raised as an issue
+| Field | Details |
+| ----- | ------- |
+| **ID** | POINT-01 |
+| **Title** | UI uses "sodage" instead of "survey" |
+| **Type** | UX / Terminology |
+| **Severity** | Low |
+| **Use Case Reference** | UC-ProvideFeedback |
+| **Observed** | The application label reads "sodage" while documentation uses "survey" |
+| **Impact** | Confusion for users and testers unfamiliar with the term |
+| **Recommendation** | Align UI wording with documentation or update the UC terminology to match |
 
 ---
 
-## 8. Related Documents
+## Recommendations & next steps
 
-- [UC-ProvideFeedback](../../doc/usecase-diagram/usecases/UC-ProvideFeedback/UC-ProvideFeedback.md)
-- [UC-Login](../../doc/usecase-diagram/usecases/UC-Login/UC-Login.md)
-- [Test Report: Create Account](../test_create_account/TEST_REPORT_create_account.md)
-- [Test Report: Login](../test_login/TEST_REPORT_login.md)
+- Verify partial progress saving for a survey when the student exits before completion.
+- Test required-field validation by attempting submission with missing answers.
+- Confirm the no-surveys-assigned scenario on the student dashboard.
+- Review the terminology used in the application and align it with the documentation.
+
+---
+
+## Related documents
+
+- `doc/usecase-diagram/usecases/UC-ProvideFeedback/UC-ProvideFeedback.md`
+- `doc/usecase-diagram/usecases/UC-Login/UC-Login.md`
+- `MUGISHO-MERCI-testing-documentation/Use Case Create Account testing create_Account/TEST_REPORT_create_account.md`
+- `MUGISHO-MERCI-testing-documentation/Use Case Login testing report/TEST_REPORT_login.md`
